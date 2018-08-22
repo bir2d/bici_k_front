@@ -14,6 +14,7 @@ export class UrlServices {
 
     candados=this.proxy+"/rest/candado"
     obtenerCandados=this.candados+"/listado"
+    guardarCandado=this.candados+"/guardar"
 
     constructor() {
 

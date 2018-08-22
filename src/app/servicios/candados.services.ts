@@ -13,5 +13,9 @@ export class CandadosService{
         return this._generalServices.getResources("get", this.url.obtenerCandados )
     }
 
+    guardarCandado(candado): Observable<any> {
+        return this._generalServices.getResources("post", this.url.guardarCandado,candado )
+    }
+
 
 }

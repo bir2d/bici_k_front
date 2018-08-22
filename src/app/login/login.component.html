@@ -38,7 +38,7 @@
 					</span>
 					
 					<div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20" data-validate="Ingrese Usuario">
-						<input id="first-name" class="input100" type="text" [(ngModel)]="username" name="username" placeholder="Usuario" required>						
+						<input id="first-name" class="input100" type="text" [(ngModel)]="usuario" name="username" placeholder="Usuario" required>						
 						<span class="focus-input100"></span>
 					</div>
 					<div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20" data-validate="Ingrese Contraseña">
@@ -47,7 +47,7 @@
 					</div>
 					
 					<div class="container-login100-form-btn">
-							<button pButton type="submit" class="ui-button-info"   style="width: 100%" label="Ingresar" [disabled]="username==null || password==null"></button>
+							<button pButton type="submit" class="ui-button-info"   style="width: 100%" label="Ingresar" [disabled]="usuario==null || password==null"></button>
 					</div>
 
 					<div class="w-full text-center p-t-27 p-b-239">

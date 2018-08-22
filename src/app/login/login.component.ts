@@ -20,7 +20,7 @@ export class LoginComponent implements AfterViewInit{
 
     login(){
       
-      this._generalServices.autenticar("ricardo","ricardo").subscribe((respuesta) => {
+      this._generalServices.autenticar(this.usuario,this.password).subscribe((respuesta) => {
         console.log(respuesta);
         
       }, (err: any) => console.log(err));

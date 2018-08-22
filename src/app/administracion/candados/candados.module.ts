@@ -9,6 +9,9 @@ import {TableModule} from 'primeng/table';
 import { CandadosService } from '../../servicios/candados.services';
 import {DialogModule} from 'primeng/dialog';
 import {ButtonModule} from 'primeng/button';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -18,7 +21,11 @@ import {ButtonModule} from 'primeng/button';
     PanelModule,
     TableModule,
     DialogModule,
-    ButtonModule
+    ButtonModule,
+    MessagesModule,
+    MessageModule,
+    FormsModule,
+    ReactiveFormsModule
 
   ],
   declarations: [CandadosComponent],
