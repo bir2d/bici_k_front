@@ -60,7 +60,7 @@ export class GeneralService  implements CanActivate{
                                 if (err.status == 401) {
                                     return false;
                                     
-                                    this._router.navigate(['/authentication/login/error']);
+                                  
                                 }
                             }
                         );
@@ -92,7 +92,7 @@ export class GeneralService  implements CanActivate{
         if (localStorage.getItem(this.strSesion) != null) {
             let headersToken = new Headers();
             var decrypted =localStorage.getItem(this.strSesion);
-            let token = JSON.parse(JSON.parse(decrypted))
+            let token = JSON.parse(decrypted)
             headersToken.append('Authorization', 'Bearer ' + token.token.access_token)
             let optionsToken = new RequestOptions({ headers: headersToken });
             if (tipo == "get") {
@@ -165,7 +165,7 @@ export class GeneralService  implements CanActivate{
                 if (res.status == 412) {
                     errMessage = { 'status': res.status, 'message': res.text() };
                 } else if (res.status == 401) {
-                    this._router.navigate(['/authentication/login']);
+                    this._router.navigate(['/login']);
                 }
                 else {
                     errMessage = res.json();

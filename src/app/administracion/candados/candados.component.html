@@ -1,0 +1,48 @@
+<!-- ============================================================== -->
+<!-- Simple four boxes Row -->
+<!-- ============================================================== -->
+<div class="ui-g">
+    <!-- column -->    
+    <div class="ui-g-12">
+        <p-panel header="Candados"  [style]="{'margin-top':'20px'}">
+            
+            <p-table [value]="candados">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th *ngFor="let col of cols">
+                            {{col.header}}
+                        </th>
+                        <th>
+                            Opciones
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-candado>
+                    <tr>
+                        <td *ngFor="let col of cols">
+                                {{candado[col.field]}}
+                        </td>
+                        <td  [style]="{'text-align': 'center'}">
+
+                            <button pButton type="button" icon="fa fa-search" label="Ver"  (click)="ver(candado)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </p-panel>
+    </div>
+    
+    <!-- column -->    
+</div>
+
+<p-dialog header="Detalle Candado" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" width="550" (onAfterHide)="onDialogHide()">
+    <div class="ui-g" *ngIf="candadoSelecionado">
+        <!-- <div class="ui-g-12" style="text-align:center">
+            <img src="assets/showcase/images/demo/car/{{selectedCar.brand}}.png">
+        </div> -->
+        <div class="ui-g-4">{{cols[0].header}}: </div>
+        <div class="ui-g-8">{{candadoSelecionado[cols[0].field]}}</div>
+
+        
+    </div>
+</p-dialog>
