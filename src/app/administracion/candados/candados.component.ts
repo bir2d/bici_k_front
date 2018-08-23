@@ -1,7 +1,8 @@
 import { Component, AfterViewInit, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {FormControl, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { CandadosService } from '../../servicios/candados.services';
+import { ConfirmationService } from 'primeng/api';
 
 
 @Component({
@@ -9,14 +10,16 @@ import { CandadosService } from '../../servicios/candados.services';
   templateUrl: './candados.component.html',
   styleUrls: ['./candados.component.scss']
 })
-export class CandadosComponent implements AfterViewInit,OnInit{
-    ngAfterViewInit(){}    
+export class CandadosComponent implements AfterViewInit, OnInit {
+  ngAfterViewInit() { }
 
-    cols = [];
-    candados;
-    candadoSelecionado;
-    displayDialog=false
-  constructor(private _candadoServices:CandadosService){
+  cols = [];
+  candados;
+  candadoSelecionado;
+  displayDialog = false
+  editar = false
+  submitted = false
+  constructor(private _candadoServices: CandadosService, private confirmationService: ConfirmationService) {
 
   }
 
@@ -24,25 +27,57 @@ export class CandadosComponent implements AfterViewInit,OnInit{
     //this.carService.getCarsSmall().then(cars => this.cars = cars);
 
     this.cols = [
-        { field: 'codigoBien', header: 'Código Bien' },
-        { field: 'descripcion', header: 'Descripción' },
-        { field: 'clave', header: 'Clave' },
-        { field: 'asignadoo', header: 'Asignado' }
+      { field: 'codigoBien', header: 'Código Bien' },
+      { field: 'clave', header: 'Clave' },
+      { field: 'descripcion', header: 'Descripción' }
+      //,{ field: 'asignadoo', header: 'Asignado' }
     ];
+    this.cargarCandados();
 
+  }
+  cargarCandados() {
     this._candadoServices.obtenerCandados()
       .subscribe((candados: any[]) => {
         this.candados = candados;
         console.log(candados);
-        
-      }, (err: any) => console.log("error")
-      
-      //this.msgs.push({ severity: 'error', summary: 'Error', detail: 'No se pudo cargar los movimientos.' })
-      );
-}
-ver(candado){
-  this.candadoSelecionado=candado;
-  this.displayDialog=true;
 
-}
+      }, (err: any) => console.log("error"));
+  }
+  ver(candado) {
+    this.candadoSelecionado = candado;
+    this.displayDialog = true;
+
+  }
+  nuevo() {
+    this.candadoSelecionado = {};
+    this.editar = true
+  }
+
+  guardar() {
+    this._candadoServices.guardarCandado(this.candadoSelecionado)
+      .subscribe((candados: any) => {
+        this.editar = false;
+        this.cargarCandados()
+      }, (err: any) => console.log("error"));
+  }
+
+  editarCandado(candado) {
+    this.candadoSelecionado = candado;
+    this.editar = true
+  }
+  confirmarEliminar(candado) {
+    this.candadoSelecionado = candado
+    this.confirmationService.confirm({
+      key: "confEliminar",
+      message: '¿Está seguro que desea eliminar el bien ' + candado.codigoBien + '?',
+      accept: () => {
+        this._candadoServices.eliminarCandado(this.candadoSelecionado)
+          .subscribe((candados: any) => {
+          
+            this.cargarCandados()
+          }, (err: any) => console.log("error"));
+      }
+    });
+  }
+
 }
