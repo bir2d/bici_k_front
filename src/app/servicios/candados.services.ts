@@ -13,8 +13,16 @@ export class CandadosService{
         return this._generalServices.getResources("get", this.url.obtenerCandados )
     }
 
+    obtenerCandadosSinAsignar(): Observable<any> {
+        return this._generalServices.getResources("get", this.url.obtenerCandadosSinAsignar )
+    }
+
     guardarCandado(candado): Observable<any> {
         return this._generalServices.getResources("post", this.url.guardarCandado,candado )
+    }
+
+    eliminarCandado(candado): Observable<any> {
+        return this._generalServices.getResources("delete", this.url.eliminarCandado+candado.id )
     }
 
 

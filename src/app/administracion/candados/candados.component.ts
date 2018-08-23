@@ -2,6 +2,7 @@ import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormControl, Validators } from '@angular/forms';
 import { CandadosService } from '../../servicios/candados.services';
+import { ConfirmationService } from 'primeng/api';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class CandadosComponent implements AfterViewInit, OnInit {
   displayDialog = false
   editar = false
   submitted = false
-  constructor(private _candadoServices: CandadosService) {
+  constructor(private _candadoServices: CandadosService, private confirmationService: ConfirmationService) {
 
   }
 
@@ -48,7 +49,7 @@ export class CandadosComponent implements AfterViewInit, OnInit {
 
   }
   nuevo() {
-    this.candadoSelecionado = { };
+    this.candadoSelecionado = {};
     this.editar = true
   }
 
@@ -61,8 +62,22 @@ export class CandadosComponent implements AfterViewInit, OnInit {
   }
 
   editarCandado(candado) {
-    this.candadoSelecionado =candado;
+    this.candadoSelecionado = candado;
     this.editar = true
+  }
+  confirmarEliminar(candado) {
+    this.candadoSelecionado = candado
+    this.confirmationService.confirm({
+      key: "confEliminar",
+      message: '¿Está seguro que desea eliminar el bien ' + candado.codigoBien + '?',
+      accept: () => {
+        this._candadoServices.eliminarCandado(this.candadoSelecionado)
+          .subscribe((candados: any) => {
+          
+            this.cargarCandados()
+          }, (err: any) => console.log("error"));
+      }
+    });
   }
 
 }

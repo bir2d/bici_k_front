@@ -30,6 +30,9 @@ export const AppRoutes: Routes = [
     }, {
         path: 'candados',
         loadChildren: './administracion/candados/candados.module#CandadosModule'
+      }, {
+        path: 'bicicletas',
+        loadChildren: './administracion/bicicletas/bicicletas.module#BicicletasModule'
       }]
   }
   , {

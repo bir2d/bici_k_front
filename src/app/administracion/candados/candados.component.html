@@ -27,8 +27,9 @@
                                     </td>
                                     <td  style="text-align: center;width: 95px">
 
-                                        <button pButton type="button" icon="fa fa-search"  (click)="ver(candado)"></button> 
+                                        <button pButton type="button" icon="fa fa-search" class="ui-button-success" (click)="ver(candado)"></button> 
                                         <button pButton type="button" icon="fa fa-pencil-square-o"  (click)="editarCandado(candado)"></button>
+                                        <button pButton type="button" icon="fa fa-times" class="ui-button-danger"  (click)="confirmarEliminar(candado)"></button>
                                     </td>
                                 </tr>
                             </ng-template>
@@ -108,3 +109,11 @@
 
     </div>
 </p-dialog>
+
+<p-confirmDialog header="Confirmación Eliminar" key="confEliminar" [baseZIndex]="2" [autoZIndex]="false" icon="pi pi-exclamation-triangle" width="425" #cd>
+    <p-footer>
+        <button type="button" pButton icon="pi pi-check" label="Aceptar" (click)="cd.accept()"></button>
+        <button type="button" pButton icon="pi pi-times" label="Cancelar" (click)="cd.reject()"></button>
+        
+    </p-footer>
+</p-confirmDialog>

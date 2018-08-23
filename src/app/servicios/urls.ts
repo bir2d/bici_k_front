@@ -13,8 +13,16 @@ export class UrlServices {
     loginActive=this.autorizacion+'/uaa/active'
 
     candados=this.proxy+"/rest/candado"
+    
     obtenerCandados=this.candados+"/listado"
+    obtenerCandadosSinAsignar=this.candados+"/listado/sinAsignar"
     guardarCandado=this.candados+"/guardar"
+    eliminarCandado=this.candados+"/eliminar/"
+
+    bicicletas=this.proxy+"/rest/bicicleta"
+    obtenerBicicletas=this.bicicletas+""
+    guardarBicicleta=this.bicicletas+"/guardar"
+    eliminarBicicleta=this.bicicletas+"/eliminar/"
 
     constructor() {
 
