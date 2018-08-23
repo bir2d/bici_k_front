@@ -11,8 +11,8 @@ import { GeneralService } from '../servicios/general/general.service';
 export class LoginComponent implements AfterViewInit{
     ngAfterViewInit(){}    
 
-    usuario="ricardo";
-    password="ricardo";
+    usuario;
+    password;
 
     constructor(public _generalServices: GeneralService){
 
