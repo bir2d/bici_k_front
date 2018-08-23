@@ -1,0 +1,93 @@
+<!-- ============================================================== -->
+<!-- Simple four boxes Row -->
+<!-- ============================================================== -->
+<div class="ui-g">
+    <!-- column -->    
+    <div class="ui-g-12">
+        <p-panel header="Empleados"  [style]="{'margin-top':'20px'}">
+
+            <p-dataView #dv [value]="empleados" [paginator]="true" [rows]="4" paginatorPosition="both" filterBy="cedula"
+              [sortField]="sortField" [sortOrder]="sortOrder">
+            <p-header>
+              <div class="ui-helper-clearfix">
+                <div class="ui-g">
+                 
+                  <div class="ui-g-6 ui-md-6 filter-container">
+                      <div style="position:relative">
+                          <input type="search" pInputText placeholder="Buscar por cédula" (keyup)="dv.filter($event.target.value)">
+                      </div>
+                  </div>
+                  
+              </div>
+            </div>
+            </p-header>
+            
+              <ng-template let-empleado pTemplate="listItem">
+                  <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
+                      <div class="ui-g-12 ui-md-3" style="text-align:center">
+                          <img src="https://s3-us-west-2.amazonaws.com/krfacerekognition/{{empleado.foto}}" height="150" width="150">
+                      </div>
+                      <div class="ui-g-12 ui-md-8 car-details">
+                          <div class="ui-g">
+                              <div class="ui-g-2 ui-sm-6">Cédula: </div>
+                              <div class="ui-g-10 ui-sm-6"><b>{{empleado.cedula}}</b></div>
+          
+                              <div class="ui-g-2 ui-sm-6">Nombre: </div>
+                              <div class="ui-g-10 ui-sm-6"><b>{{empleado.nombre}}</b></div>
+          
+                              <div class="ui-g-2 ui-sm-6">Cargo: </div>
+                              <div class="ui-g-10 ui-sm-6"><b>{{empleado.cargo}}</b></div>
+          
+                          </div>
+                      </div>
+                      <div class="ui-g-12 ui-md-1 search-icon">
+                          <button pButton type="button" icon="fa fa-search" label="Ver"  (click)="ver(empleado)"></button>
+                      </div>
+                  </div>
+              </ng-template>
+            </p-dataView>
+            <p-footer>
+                Kruger 2018
+            </p-footer>
+            
+          </p-panel>
+         
+    </div>
+
+    
+    <!-- column -->    
+</div>
+
+<p-dialog header="Detalle Empleado" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" width="750" (onAfterHide)="onDialogHide()">
+    <div class="ui-g" *ngIf="empleadoSeleccionado" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
+        <!-- <div class="ui-g-12" style="text-align:center">
+            <img src="assets/showcase/images/demo/car/{{selectedCar.brand}}.png">
+        </div> -->
+
+        <div class="ui-g-6 ui-md-6" style="text-align:center">
+            <img src="https://s3-us-west-2.amazonaws.com/krfacerekognition/{{empleadoSeleccionado.foto}}" height="200" width="200">
+        </div>
+        <div class="ui-g-6 ui-md-6 car-details">
+            <div class="ui-g">
+                <div class="ui-g-6 ui-sm-6">Cédula: </div>
+                <div class="ui-g-6 ui-sm-6"><b>{{empleadoSeleccionado.cedula}}</b></div>
+
+                <div class="ui-g-6 ui-sm-6">Nombre: </div>
+                <div class="ui-g-6 ui-sm-6"><b>{{empleadoSeleccionado.nombre}}</b></div>
+
+                <div class="ui-g-6 ui-sm-6">Descripción: </div>
+                <div class="ui-g-6 ui-sm-6"><b>{{empleadoSeleccionado.cargo}}</b></div>
+
+                <div class="ui-g-6 ui-sm-6">Estado: </div>
+                <div class="ui-g-6 ui-sm-6"><b>{{empleadoSeleccionado.email}}</b></div>
+
+               
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+</p-dialog>

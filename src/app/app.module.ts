@@ -21,6 +21,9 @@ import { BasicComponent } from './layouts/basic/basic.component';
 import { GeneralService } from './servicios/general/general.service';
 import { HttpModule } from '../../node_modules/@angular/http';
 
+
+
+
 @NgModule({
   declarations: [
     AppComponent,

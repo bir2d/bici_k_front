@@ -13,7 +13,9 @@ export class UrlServices {
     loginActive=this.autorizacion+'/uaa/active'
 
     candados=this.proxy+"/rest/candado"
+    empleados=this.proxy+"/empleado"
     obtenerCandados=this.candados+"/listado"
+    obtenerEmpleados=this.empleados+"/listadoRest"
 
     constructor() {
 

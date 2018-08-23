@@ -30,7 +30,12 @@ export const AppRoutes: Routes = [
     }, {
         path: 'candados',
         loadChildren: './administracion/candados/candados.module#CandadosModule'
-      }]
+      },
+      {
+        path: 'empleados',
+        loadChildren: './administracion/empleados/empleados.module#EmpleadosModule'
+      }
+    ]
   }
   , {
     path: 'login',
