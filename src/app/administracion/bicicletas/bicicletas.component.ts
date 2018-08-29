@@ -5,6 +5,7 @@ import { BicicletasService } from '../../servicios/bicicletas.services';
 import { ConfirmationService } from 'primeng/api';
 import { CandadosService } from '../../servicios/candados.services';
 import {SelectItem} from 'primeng/api';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'bicicletas',
@@ -24,9 +25,13 @@ export class BicicletasComponent implements AfterViewInit, OnInit {
   candadosItem : SelectItem[];
   constructor(private _bicicletaServices: BicicletasService, 
     private _candadoServices: CandadosService,
-    private confirmationService: ConfirmationService) {
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService) {
 
   }
+  addSingle(error) {
+    this.messageService.add({severity:'error', summary:'Conexión', detail:error});
+}
 
   ngOnInit() {
     //this.carService.getCarsSmall().then(cars => this.cars = cars);
@@ -49,7 +54,7 @@ export class BicicletasComponent implements AfterViewInit, OnInit {
         this.candadosItem.push({label:x.descripcion, value:x.id})
       });
 
-    }, (err: any) => console.log("error"));
+    }, (err: any) => this.addSingle("No se puede conectar con el backend"));
   }
   cargarBicicletas() {
     this._bicicletaServices.obtenerBicicletas()

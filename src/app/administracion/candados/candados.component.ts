@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormControl, Validators } from '@angular/forms';
 import { CandadosService } from '../../servicios/candados.services';
 import { ConfirmationService } from 'primeng/api';
+import {MessageService} from 'primeng/api';
 
 
 @Component({
@@ -19,9 +20,12 @@ export class CandadosComponent implements AfterViewInit, OnInit {
   displayDialog = false
   editar = false
   submitted = false
-  constructor(private _candadoServices: CandadosService, private confirmationService: ConfirmationService) {
+  constructor(private _candadoServices: CandadosService, private confirmationService: ConfirmationService, private messageService: MessageService) {
 
   }
+  addSingle(error) {
+    this.messageService.add({severity:'error', summary:'Conexión', detail:error});
+}
 
   ngOnInit() {
     //this.carService.getCarsSmall().then(cars => this.cars = cars);
@@ -41,7 +45,7 @@ export class CandadosComponent implements AfterViewInit, OnInit {
         this.candados = candados;
         console.log(candados);
 
-      }, (err: any) => console.log("error"));
+      }, (err: any) => this.addSingle("No se puede conectar con el backend"));
   }
   ver(candado) {
     this.candadoSelecionado = candado;

@@ -2,6 +2,8 @@ import { Component, AfterViewInit, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {FormControl, Validators} from '@angular/forms';
 import { EmpleadosService } from '../../servicios/empleados.services';
+import {MessageService} from 'primeng/api';
+
 
 
 @Component({
@@ -16,9 +18,13 @@ export class EmpleadosComponent implements AfterViewInit,OnInit{
     empleados;
     empleadoSeleccionado;
     displayDialog=false
-  constructor(private _empleadoServices:EmpleadosService){
-
+  constructor(private _empleadoServices:EmpleadosService, private messageService: MessageService){
+   
   }
+
+  addSingle(error) {
+    this.messageService.add({severity:'error', summary:'Conexión', detail:error});
+}
 
   ngOnInit() {
     //this.carService.getCarsSmall().then(cars => this.cars = cars);
@@ -36,9 +42,8 @@ export class EmpleadosComponent implements AfterViewInit,OnInit{
         this.empleados = empleados;
         console.log(empleados);
         
-      }, (err: any) => console.log("error")
-      
-      //this.msgs.push({ severity: 'error', summary: 'Error', detail: 'No se pudo cargar los movimientos.' })
+      }, (err: any) => this.addSingle("No se puede conectar con el backend")
+    
       );
 }
 ver(empleado){

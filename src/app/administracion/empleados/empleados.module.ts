@@ -10,6 +10,10 @@ import { EmpleadosService } from '../../servicios/empleados.services';
 import {DialogModule} from 'primeng/dialog';
 import {ButtonModule} from 'primeng/button';
 import {DataViewModule} from 'primeng/dataview';
+import {ToastModule} from 'primeng/toast';
+import {MessageService} from 'primeng/api';
+
+
 
 
 @NgModule({
@@ -21,11 +25,12 @@ import {DataViewModule} from 'primeng/dataview';
     TableModule,
     DialogModule,
     ButtonModule,
-    DataViewModule
+    DataViewModule,
+    ToastModule
 
   ],
   declarations: [EmpleadosComponent],
-  providers:[EmpleadosService]
+  providers:[EmpleadosService, MessageService]
 })
 
 export class EmpleadosModule { }

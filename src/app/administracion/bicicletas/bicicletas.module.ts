@@ -17,6 +17,8 @@ import {ConfirmationService} from 'primeng/api';
 import {DataViewModule} from 'primeng/dataview';
 import { CandadosService } from '../../servicios/candados.services';
 import {DropdownModule} from 'primeng/dropdown';
+import {ToastModule, Toast} from 'primeng/toast';
+import {MessageService} from 'primeng/api';
 @NgModule({
   imports: [
     CommonModule,
@@ -32,11 +34,12 @@ import {DropdownModule} from 'primeng/dropdown';
     ReactiveFormsModule,
     ConfirmDialogModule,
     DataViewModule,
-    DropdownModule
+    DropdownModule,
+    ToastModule
 
   ],
   declarations: [BicicletasComponent],
-  providers:[BicicletasService,ConfirmationService,CandadosService]
+  providers:[BicicletasService,ConfirmationService,CandadosService, MessageService]
 })
 
 export class BicicletasModule { }

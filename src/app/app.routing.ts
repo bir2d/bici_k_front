@@ -39,7 +39,7 @@ export const AppRoutes: Routes = [
       path: 'empleados',
       loadChildren: './administracion/empleados/empleados.module#EmpleadosModule'
     }
-  
+   
     ]
 
   }

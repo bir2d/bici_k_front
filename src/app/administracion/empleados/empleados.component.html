@@ -1,9 +1,12 @@
 <!-- ============================================================== -->
 <!-- Simple four boxes Row -->
 <!-- ============================================================== -->
+<p-toast position="center"></p-toast>
 <div class="ui-g">
+
     <!-- column -->    
     <div class="ui-g-12">
+            
         <p-panel header="Empleados"  [style]="{'margin-top':'20px'}">
 
             <p-dataView #dv [value]="empleados" [paginator]="true" [rows]="4" paginatorPosition="both" filterBy="cedula"

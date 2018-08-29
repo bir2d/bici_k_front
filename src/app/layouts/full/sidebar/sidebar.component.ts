@@ -13,6 +13,7 @@ export class AppSidebarComponent {
   properties= new Properties();
   strSesion = this.properties.strSesion;
   nombre;
+  foto;
   
   private _mobileQueryListener: () => void;
 
@@ -22,7 +23,7 @@ export class AppSidebarComponent {
     this.mobileQuery.addListener(this._mobileQueryListener);
     this.mobileQuery.removeListener(this._mobileQueryListener);
     this.nombre= JSON.parse(localStorage.getItem(this.strSesion)).usuario.nombre
-
+    this.foto= JSON.parse(localStorage.getItem(this.strSesion)).usuario.foto;
     
   }
 

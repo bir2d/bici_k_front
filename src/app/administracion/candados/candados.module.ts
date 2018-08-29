@@ -14,6 +14,8 @@ import {MessageModule} from 'primeng/message';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
+import {ToastModule, Toast} from 'primeng/toast';
+import {MessageService} from 'primeng/api';
 
 @NgModule({
   imports: [
@@ -28,11 +30,12 @@ import {ConfirmationService} from 'primeng/api';
     MessageModule,
     FormsModule,
     ReactiveFormsModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    ToastModule
 
   ],
   declarations: [CandadosComponent],
-  providers:[CandadosService,ConfirmationService]
+  providers:[CandadosService,ConfirmationService, MessageService]
 })
 
 export class CandadosModule { }
