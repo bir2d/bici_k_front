@@ -61,4 +61,25 @@ export class EmpleadosComponent implements AfterViewInit, OnInit {
     this.empleadoSeleccionado = empleado;
     this.editar = true
   }
+
+  cargarEmpleados() {
+    this._empleadoServices.obtenerEmpleados()
+      .subscribe((empleados: any[]) => {
+        this.empleados = empleados;
+      }, (err: any) => console.log("error"));
+  }
+
+  guardar() {
+    this._empleadoServices.guardarEmpleado(this.empleadoSeleccionado,this.documento)
+      .subscribe((emplados: any) => {
+        this.editar = false;
+        this.cargarEmpleados();
+      }, (err: any) => console.log(err));
+  }
+
+  fileChangeEvent(event) {
+    let e = event.srcElement ? event.srcElement : event.target;
+    this.documento = (e.files);
+  }
+
 }

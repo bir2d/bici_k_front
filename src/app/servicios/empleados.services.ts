@@ -13,5 +13,12 @@ export class EmpleadosService{
         return this._generalServices.getResources("get", this.url.obtenerEmpleados )
     }
 
+    guardarEmpleado(empleado, imagen): Observable<any> {
+        var formData = new FormData();
+        if (imagen != null) formData.append('imagen', imagen[0]);
+        formData.append('empleadoStr', JSON.stringify(empleado));
+        return this._generalServices.getResources("post", this.url.guardarEmpleados, formData)
+    }
+
 
 }

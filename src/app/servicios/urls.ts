@@ -15,9 +15,10 @@ export class UrlServices {
     candados=this.proxy+"/rest/candado"
 
     
-    empleados=this.proxy+"/empleado"
+    empleados=this.proxy+"/rest/empleado"
 
-    obtenerEmpleados=this.empleados+"/listadoRest"
+    obtenerEmpleados=this.empleados+""
+    guardarEmpleados=this.empleados+""
 
 
 
