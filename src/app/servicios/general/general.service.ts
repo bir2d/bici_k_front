@@ -82,7 +82,8 @@ export class GeneralService  implements CanActivate{
     logout() {
         localStorage.removeItem(this.strSesion);
         localStorage.removeItem("nombres");
-        this._router.navigate(['/authentication/login']);
+      
+        this._router.navigate(['login']);
     }
 
 

@@ -5,6 +5,7 @@ import { ChangeDetectorRef, Component, NgZone, OnDestroy, ViewChild, HostListene
 import { MenuItems } from '../../shared/menu-items/menu-items';
 import { AppHeaderComponent } from './header/header.component';
 import { AppSidebarComponent } from './sidebar/sidebar.component';
+import { GeneralService } from '../../servicios/general/general.service';
 
 /** @title Responsive sidenav */
 @Component({
@@ -29,5 +30,5 @@ export class FullComponent implements OnDestroy, AfterViewInit {
  ngAfterViewInit() {
      
  } 
-   
+
 }

@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, NgZone, OnDestroy, ViewChild, HostListene
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MenuItems } from '../../../shared/menu-items/menu-items';
 import { Properties } from '../../../properties';
+import { GeneralService } from '../../../servicios/general/general.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -17,7 +18,7 @@ export class AppSidebarComponent {
   
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, public menuItems: MenuItems) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, public menuItems: MenuItems, private generalService:GeneralService) {
     this.mobileQuery = media.matchMedia('(min-width: 768px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -29,6 +30,11 @@ export class AppSidebarComponent {
 
   ngOnDestroy(): void {
    
+  }
+  public logout() {
+    this.generalService.logout();
+    
+    alert('Sesión cerrada');
   }
  
 }
