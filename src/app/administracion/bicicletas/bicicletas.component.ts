@@ -34,13 +34,12 @@ export class BicicletasComponent implements AfterViewInit, OnInit {
 }
 
   ngOnInit() {
-    //this.carService.getCarsSmall().then(cars => this.cars = cars);
 
     this.cols = [
       { field: 'codigoBien', header: 'Código Bien' },
       { field: 'estado', header: 'Estado' },
       { field: 'descripcion', header: 'Descripción' }
-      //,{ field: 'asignadoo', header: 'Asignado' }
+     
     ];
     this.cargarBicicletas();
     this.cargarCandaddos();
@@ -60,8 +59,6 @@ export class BicicletasComponent implements AfterViewInit, OnInit {
     this._bicicletaServices.obtenerBicicletas()
       .subscribe((bicicletas: any[]) => {
         this.bicicletas = bicicletas;
-        console.log(bicicletas);
-
       }, (err: any) => console.log("error"));
   }
   ver(bicicleta) {

@@ -9,7 +9,6 @@
             <form #form="ngForm" (ngSubmit)="form.valid && guardar()">
                 <div class="ui-g">
                     <div class="ui-g-12" *ngIf="!editar">
-
                         <p-dataView #dv [value]="bicicletas" [paginator]="true" layout="grid" [rows]="5" paginatorPosition="both" filterBy="codigoBien"
                             [sortField]="sortField" [sortOrder]="sortOrder">
                             <p-header>
@@ -55,7 +54,7 @@
                                         <button pButton type="button" icon="pi pi-search" (click)="ver(bicicleta)" class="ui-button-success"></button>
                                         <button pButton type="button" icon="fa fa-pencil-square-o" (click)="editarBicicleta(bicicleta)"></button>
                                         <button pButton type="button" icon="fa fa-times" class="ui-button-danger" (click)="confirmarEliminar(bicicleta)"></button>
-                                        
+
                                     </div>
                                 </div>
                             </ng-template>
@@ -68,7 +67,7 @@
                                         <button pButton type="button" icon="pi pi-search" class="ui-button-success" (click)="ver(bicicleta)" style="margin-top:0"></button>
                                         <button pButton type="button" icon="fa fa-pencil-square-o" (click)="editarBicicleta(bicicleta)"></button>
                                         <button pButton type="button" icon="fa fa-times" class="ui-button-danger" (click)="confirmarEliminar(bicicleta)"></button>
-                                        
+
                                     </p-panel>
                                 </div>
                             </ng-template>
@@ -127,17 +126,17 @@
                                 </div>
                             </div>
                             <div class="ui-grid-row">
-                                    <div class="ui-grid-col-2">
-                                        Candado:
-                                    </div>
-                                    <div class="ui-grid-col-6">
-                                            <p-dropdown [options]="candadosItem" [(ngModel)]="bicicletaSelecionado.candadoId" name="candado"></p-dropdown>
-    
-                                    </div>
-                                    <div class="ui-grid-col-4">
-                                        
-                                    </div>
+                                <div class="ui-grid-col-2">
+                                    Candado:
                                 </div>
+                                <div class="ui-grid-col-6">
+                                    <p-dropdown [options]="candadosItem" [(ngModel)]="bicicletaSelecionado.candadoId" name="candado"></p-dropdown>
+
+                                </div>
+                                <div class="ui-grid-col-4">
+
+                                </div>
+                            </div>
 
 
 
