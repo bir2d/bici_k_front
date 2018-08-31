@@ -71,7 +71,7 @@ export class EmpleadosComponent implements AfterViewInit, OnInit {
 
   guardar() {
     this._empleadoServices.guardarEmpleado(this.empleadoSeleccionado,this.documento)
-      .subscribe((emplados: any) => {
+      .subscribe((empleados: any) => {
         this.editar = false;
         this.cargarEmpleados();
       }, (err: any) => console.log(err));
@@ -82,4 +82,10 @@ export class EmpleadosComponent implements AfterViewInit, OnInit {
     this.documento = (e.files);
   }
 
+
+  nuevo() {
+    this.empleadoSeleccionado = {};
+    this.editar = true;
+   
+  }
 }
