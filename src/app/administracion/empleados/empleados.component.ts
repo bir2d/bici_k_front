@@ -82,6 +82,22 @@ export class EmpleadosComponent implements AfterViewInit, OnInit {
     this.documento = (e.files);
   }
 
+  confirmarEliminar(empleado) {
+    this.empleadoSeleccionado = empleado
+    this.confirmationService.confirm({
+      
+      key: "confEliminarEmp",
+      message: '¿Está seguro que desea eliminar el empleado ' + empleado.cedula + '?',
+      accept: () => {
+        this._empleadoServices.eliminarEmpleado(this.empleadoSeleccionado)
+          .subscribe((empleados: any) => {
+          
+            this.cargarEmpleados()
+          }, (err: any) => console.log("error"));
+      }
+    });
+  }
+
 
   nuevo() {
     this.empleadoSeleccionado = {};

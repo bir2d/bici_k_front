@@ -152,7 +152,7 @@
     <!-- column -->
 </div>
 
-<p-dialog header="Detalle empleado" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" width="750" (onAfterHide)="onDialogHide()">
+<p-dialog header="Detalle empleado" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" width="750" >
     <div class="ui-g" *ngIf="empleadoSeleccionado" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
         <!-- <div class="ui-g-12" style="text-align:center">
             <img src="assets/showcase/images/demo/car/{{selectedCar.brand}}.png">
@@ -189,7 +189,7 @@
     </div>
 </p-dialog>
 
-<p-confirmDialog header="Confirmación Eliminar" key="confEliminarBici" [baseZIndex]="2" [autoZIndex]="false" icon="pi pi-exclamation-triangle"
+<p-confirmDialog header="Confirmación Eliminar" key="confEliminarEmp" [baseZIndex]="2" [autoZIndex]="false" icon="pi pi-exclamation-triangle"
     width="425" #cd>
     <p-footer>
         <button type="button" pButton icon="pi pi-check" label="Aceptar" (click)="cd.accept()"></button>

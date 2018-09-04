@@ -19,6 +19,7 @@ export class UrlServices {
 
     obtenerEmpleados=this.empleados+""
     guardarEmpleados=this.empleados+""
+    eliminarEmpleados= this.empleados+"/"
 
 
 

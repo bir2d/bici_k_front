@@ -94,7 +94,7 @@ export class BicicletasComponent implements AfterViewInit, OnInit {
         this._bicicletaServices.eliminarBicicleta(this.bicicletaSelecionado)
           .subscribe((bicicletas: any) => {
           
-            this.cargarBicicletas()
+           // this.cargarBicicletas()
           }, (err: any) => console.log("error"));
       }
     });

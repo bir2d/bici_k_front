@@ -146,7 +146,11 @@ export class GeneralService  implements CanActivate{
                     .map((res: Response) => {
                         //this.blockUI.stop();
                         //result = res.json();
-                        return result;
+                        if (res.status ==200){
+                      //      console.log(res);
+                        }
+                        
+                        return res;
                     }).catch(this.handleError());
             }
 

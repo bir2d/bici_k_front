@@ -19,6 +19,8 @@ export class EmpleadosService{
         formData.append('empleadoStr', JSON.stringify(empleado));
         return this._generalServices.getResources("post", this.url.guardarEmpleados, formData)
     }
-
+    eliminarEmpleado(empleado): Observable<any> {
+        return this._generalServices.getResources("delete", this.url.eliminarEmpleados + empleado.id)
+    }
 
 }
