@@ -12,87 +12,93 @@ import { Properties } from '../../properties';
 //import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Injectable()
-export class GeneralService  implements CanActivate{
+export class GeneralService implements CanActivate {
     //@BlockUI() blockUI: NgBlockUI;
     url = new UrlServices();
-    properties= new Properties();
+    properties = new Properties();
     strSesion = this.properties.strSesion;
     key = "HackersSeeIT2";
     constructor(private _http: Http, private _router: Router) { }
 
 
     canActivate(): boolean {
-       
-        
-        if (localStorage.getItem(this.strSesion)==null) {
-          this._router.navigate(['login']);
-          return false;
+
+
+        if (localStorage.getItem(this.strSesion) == null) {
+            this._router.navigate(['login']);
+            return false;
         }
         return true;
-      }
+    }
 
     autenticar(username = null, password = null): Observable<any> {
         let params = new URLSearchParams();
         let headers = new Headers();
         headers.append('Authorization', 'Basic ' + btoa("bicik:bicik"))
         let options = new RequestOptions({ headers: headers });
-        
-       return this._http.post(this.url.login + '&username=' + username + '&password=' + password, params.toString(), options)
-            .map(res => {
-                    let token=res.json()
-                    console.log(token);
-                    
-                    let headersToken = new Headers();
-                    headersToken.append('Authorization', 'Bearer ' + token.access_token)
-                    let optionsToken = new RequestOptions({ headers: headersToken });
-                    this._http.get(this.url.token, optionsToken)
-                        .map(res => res.json())
-                        .subscribe(
-                            usuario => {                               
 
-                                let usuarioLocalStorage = { "token": token, "usuario": usuario.principal }
-                                localStorage.setItem(this.strSesion,JSON.stringify(usuarioLocalStorage) );
-                                window.open("/", "_self")
+        return this._http.post(this.url.login + '&username=' + username + '&password=' + password, params.toString(), options)
+            .map(res => {
+                let token = res.json()
+                console.log(token);
+
+                let headersToken = new Headers();
+                headersToken.append('Authorization', 'Bearer ' + token.access_token)
+                let optionsToken = new RequestOptions({ headers: headersToken });
+                this._http.get(this.url.token, optionsToken)
+                    .map(res => res.json())
+                    .subscribe(
+                        usuario => {
+
+                            let usuarioLocalStorage = { "token": token, "usuario": usuario.principal }
+                            localStorage.setItem(this.strSesion, JSON.stringify(usuarioLocalStorage));
+                            window.open("/", "_self")
+                            return false;
+                        },
+                        err => {
+                            //console.log("error",err.status)
+                            if (err.status == 401) {
                                 return false;
-                            },
-                            err => {
-                                //console.log("error",err.status)
-                                if (err.status == 401) {
-                                    return false;
-                                    
-                                  
-                                }
+
+
                             }
-                        );
-                },
+                        }
+                    );
+            },
                 err => {
-                   // this.stopBlock()
+                    // this.stopBlock()
                     if (err.status == 401) {
-                        return false;  
+                        return false;
                     }
                 }
             );
 
-           
+
     }
 
- 
-   
+
+
 
     logout() {
         localStorage.removeItem(this.strSesion);
         localStorage.removeItem("nombres");
-      
+
         this._router.navigate(['login']);
     }
 
 
     getResources(tipo, url, body = null): Observable<any> {
+
+        //! this is very important
+        //? question
+        // TODO esto es lo primero a hacer 
+       
+
         //this.blockUI.start('Loading...');
         let result;
         if (localStorage.getItem(this.strSesion) != null) {
             let headersToken = new Headers();
-            var decrypted =localStorage.getItem(this.strSesion);
+            var decrypted = localStorage.getItem(this.strSesion);
             let token = JSON.parse(decrypted)
             headersToken.append('Authorization', 'Bearer ' + token.token.access_token)
             let optionsToken = new RequestOptions({ headers: headersToken });
@@ -104,23 +110,10 @@ export class GeneralService  implements CanActivate{
                         return result;
                     }).catch(this.handleError());
             } else if (tipo == "post") {
-                
-                if(Array.isArray(body)){
-                    body.forEach(element => {
-                        if(typeof element == 'object'){
-                            element["usuarioregistroid"]=localStorage.getItem("username")
-                            element["fecharegistro"]=new Date()
-                            
-                        }
-                    });
+                console.log("contenido de body:" + typeof body);
+               
 
-                }else if(typeof body == 'object'){
-                    body["usuarioregistroid"]=localStorage.getItem("username")
-                    body["fecharegistro"]=new Date()
-                    
-                }
-                
-                
+
                 return this._http["post"](url, body, optionsToken)
                     .map((res: Response) => {
                         //this.blockUI.stop();
@@ -146,24 +139,47 @@ export class GeneralService  implements CanActivate{
                     .map((res: Response) => {
                         //this.blockUI.stop();
                         //result = res.json();
-                        if (res.status ==200){
-                      //      console.log(res);
+                        if (res.status == 200) {
+                            //      console.log(res);
                         }
-                        
+
                         return res;
                     }).catch(this.handleError());
             }
 
+        } else {
+            /** 
+             * Para peticiones que no necesitan estar autenticadas
+            */
+            if (tipo == "post") {
+              //  console.log("contenido de body:" + typeof body);
+           
+               var formData = new FormData();
+               formData.append("imagen", "ads")
+              
+                return this._http["post"]("http://localhost:6060/rest/face/identificarB", formData)
+                    .map((res: Response) => {
+                        //this.blockUI.stop();
+                     //   result = res.json();
+                     console.log(res);
+                        return res;
+                    }).catch((err) => {
+                        console.log(err)
+                        // Do messaging and error handling here
+                        return Observable.throw(err);
+
+              });
+            }
         }
-        return null;
+        //return null;
     }
 
     stopBlock() {
-       // this.blockUI.stop();
+        // this.blockUI.stop();
     }
     private handleError() {
         return (res: Response) => {
-           // this.blockUI.stop();
+            
             let errMessage: any;
             try {
                 console.log(res);
@@ -179,8 +195,6 @@ export class GeneralService  implements CanActivate{
             } catch (err) {
                 errMessage = res.statusText;
             }
-            // Security errors
-            // this.utilService.stopProcess();
             return Observable.throw(errMessage);
         };
     }

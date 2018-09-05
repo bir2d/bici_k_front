@@ -20,8 +20,8 @@ import { SpinnerComponent } from './shared/spinner.component';
 import { BasicComponent } from './layouts/basic/basic.component';
 import { GeneralService } from './servicios/general/general.service';
 import { HttpModule } from '../../node_modules/@angular/http';
-
-
+import {WebcamModule} from 'ngx-webcam';
+import {enableProdMode} from '@angular/core';
 
 
 @NgModule({
@@ -44,7 +44,8 @@ import { HttpModule } from '../../node_modules/@angular/http';
     FormsModule,
     BrowserModule,
     SharedModule,  
-    RouterModule.forRoot(AppRoutes)  
+    RouterModule.forRoot(AppRoutes) ,
+    WebcamModule
   ],
   providers: [
     GeneralService,
@@ -52,8 +53,10 @@ import { HttpModule } from '../../node_modules/@angular/http';
   {
     provide: LocationStrategy,
     useClass: HashLocationStrategy
-  }
+  },
+  
   ],
+ 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

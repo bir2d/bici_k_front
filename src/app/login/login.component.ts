@@ -1,28 +1,113 @@
-import { Component, AfterViewInit } from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {FormControl, Validators} from '@angular/forms';
+import { Component, AfterViewInit, OnInit, ElementRef } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { GeneralService } from '../servicios/general/general.service';
+import { Observable } from 'rxjs/Observable';
+import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
+import { Subject } from 'rxjs/Subject';
+import { FaceServices } from '../servicios/face.services';
+
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'starter',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements AfterViewInit{
-    ngAfterViewInit(){}    
+export class LoginComponent implements AfterViewInit, OnInit {
+  ngAfterViewInit() { }
 
-    usuario;
-    password;
 
-    constructor(public _generalServices: GeneralService){
+  @ViewChild('myInput')
+  imagenInput: ElementRef;
 
-    }
+  usuario;
+  password;
+  documento;
 
-    login(){
-      
-      this._generalServices.autenticar(this.usuario,this.password).subscribe((respuesta) => {
-        console.log(respuesta);
-        
-      }, (err: any) => console.log(err));
-    }
+  constructor(public _generalServices: GeneralService, private _faceServices: FaceServices) {
+
+  }
+
+  login() {
+
+    this._generalServices.autenticar(this.usuario, this.password).subscribe((respuesta) => {
+      console.log(respuesta);
+
+    }, (err: any) => console.log(err));
+  }
+
+  //webcam 
+  // toggle webcam on/off
+  public showWebcam = true;
+  public allowCameraSwitch = true;
+  public multipleWebcamsAvailable = false;
+  public deviceId: string;
+  public videoOptions: MediaTrackConstraints = {
+    // width: {ideal: 1024},
+    // height: {ideal: 576}
+  };
+  public errors: WebcamInitError[] = [];
+
+  // latest snapshot
+  public webcamImage: WebcamImage = null;
+
+  // webcam snapshot trigger
+  private trigger: Subject<void> = new Subject<void>();
+  // switch to next / previous / specific webcam; true/false: forward/backwards, string: deviceId
+  private nextWebcam: Subject<boolean | string> = new Subject<boolean | string>();
+
+
+  public ngOnInit(): void {
+    WebcamUtil.getAvailableVideoInputs()
+      .then((mediaDevices: MediaDeviceInfo[]) => {
+        this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1;
+      });
+  }
+
+  public triggerSnapshot(): void {
+    this.trigger.next();
+  }
+
+  public toggleWebcam(): void {
+    this.showWebcam = !this.showWebcam;
+  }
+
+  public handleInitError(error: WebcamInitError): void {
+    this.errors.push(error);
+  }
+
+  public showNextWebcam(directionOrDeviceId: boolean | string): void {
+    // true => move forward through devices
+    // false => move backwards through devices
+    // string => move to device with given deviceId
+    this.nextWebcam.next(directionOrDeviceId);
+  }
+
+  public handleImage(webcamImage: WebcamImage): void {
+    // console.info('received webcam image', webcamImage);
+    this.webcamImage = webcamImage;
+    console.log(this._faceServices.identificarEmpleado(this.webcamImage.imageAsBase64));
+   // console.log(webcamImage.imageAsBase64);
+  }
+
+  public cameraWasSwitched(deviceId: string): void {
+    console.log('active device: ' + deviceId);
+    this.deviceId = deviceId;
+  }
+
+  public get triggerObservable(): Observable<void> {
+    return this.trigger.asObservable();
+  }
+
+  public get nextWebcamObservable(): Observable<boolean | string> {
+    return this.nextWebcam.asObservable();
+  }
+
+
+  fileChangeEvent(event) {
+    let e = event.srcElement ? event.srcElement : event.target;
+    this.documento = (e.files);
+    console.log(this.documento);
+  } 
 }

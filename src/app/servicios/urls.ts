@@ -12,15 +12,16 @@ export class UrlServices {
     token = this.autorizacion + "/user"
     loginActive=this.autorizacion+'/uaa/active'
 
-    candados=this.proxy+"/rest/candado"
-
-    
+    candados=this.proxy+"/rest/candado" 
     empleados=this.proxy+"/rest/empleado"
+    face= this.proxy+"/rest/face"
 
     obtenerEmpleados=this.empleados+""
     guardarEmpleados=this.empleados+""
     eliminarEmpleados= this.empleados+"/"
 
+
+    identificarEmpleado= this.face+"/identificarB"
 
 
     obtenerCandados=this.candados+"/listado"
@@ -32,6 +33,8 @@ export class UrlServices {
     obtenerBicicletas=this.bicicletas+""
     guardarBicicleta=this.bicicletas+"/guardar"
     eliminarBicicleta=this.bicicletas+"/eliminar/"
+
+
 
     constructor() {
 
