@@ -4,9 +4,9 @@
 export class UrlServices {
 
     //servidor = "http://10.20.1.113"
-    servidor = "http://localhost"
-    autorizacion = this.servidor + ":6060";
-    proxy = this.servidor + ":6060";
+    servidor = "https://192.168.237.129"
+    autorizacion = this.servidor + ":8443";
+    proxy = this.servidor + ":8443";
 
     login = this.autorizacion + "/oauth/token?grant_type=password"
     token = this.autorizacion + "/user"

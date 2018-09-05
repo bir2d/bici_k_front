@@ -27,6 +27,8 @@
 	<link rel="stylesheet" type="text/css" href="/assets/css/util.css">
 	<link rel="stylesheet" type="text/css" href="/assets/css/main.css">
 	<!--===============================================================================================-->
+
+
 </head>
 
 <body>
@@ -38,14 +40,14 @@
 					<span class="login100-form-title p-b-34">
 						Ingreso
 						<div class="snapshot" *ngIf="webcamImage">
-							<img [src]="webcamImage.imageAsDataUrl"/>
-						  </div>
+							<img [src]="webcamImage.imageAsDataUrl" />
+						</div>
 						<webcam [height]="500" [width]="500" [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
 						 [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable" [videoOptions]="videoOptions" (cameraSwitched)="cameraWasSwitched($event)"
 						 (initError)="handleInitError($event)"></webcam>
 					</span>
-					<input  #myInput name="file" type="file" id="adjuntar" accept="image/*" class="ui-g-12 ui-md-12 ui-lg-12 inputUpload" (change)="fileChangeEvent($event)"
-					placeholder="Subir Imagen..." />
+					<input #myInput name="file" type="file" id="adjuntar" accept="image/*" class="ui-g-12 ui-md-12 ui-lg-12 inputUpload" (change)="fileChangeEvent($event)"
+					 placeholder="Subir Imagen..." />
 
 					<div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20" data-validate="Ingrese Usuario">
 						<input id="first-name" class="input100" type="text" [(ngModel)]="usuario" name="username" placeholder="Usuario" required>

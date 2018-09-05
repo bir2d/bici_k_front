@@ -6,8 +6,10 @@ import { Observable } from 'rxjs/Observable';
 import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 import { Subject } from 'rxjs/Subject';
 import { FaceServices } from '../servicios/face.services';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { ViewChild } from '@angular/core';
+import { APIResponse } from '../interfaces/api-response.interface';
 
 @Component({
   selector: 'starter',
@@ -25,7 +27,7 @@ export class LoginComponent implements AfterViewInit, OnInit {
   password;
   documento;
 
-  constructor(public _generalServices: GeneralService, private _faceServices: FaceServices) {
+  constructor(public _generalServices: GeneralService, private _faceServices: FaceServices, private http: HttpClient) {
 
   }
 
@@ -87,8 +89,9 @@ export class LoginComponent implements AfterViewInit, OnInit {
   public handleImage(webcamImage: WebcamImage): void {
     // console.info('received webcam image', webcamImage);
     this.webcamImage = webcamImage;
+    var formData = new FormData();
+    formData.append("imagen", webcamImage.imageAsBase64);
     console.log(this._faceServices.identificarEmpleado(this.webcamImage.imageAsBase64));
-   // console.log(webcamImage.imageAsBase64);
   }
 
   public cameraWasSwitched(deviceId: string): void {
@@ -109,5 +112,5 @@ export class LoginComponent implements AfterViewInit, OnInit {
     let e = event.srcElement ? event.srcElement : event.target;
     this.documento = (e.files);
     console.log(this.documento);
-  } 
+  }
 }

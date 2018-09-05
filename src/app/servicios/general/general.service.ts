@@ -4,10 +4,13 @@ import { Router, CanActivate } from '@angular/router';
 //import { Cookie } from 'ng2-cookies'; 
 import { Http, Response, Headers, RequestOptions, ResponseContentType } from '@angular/http';
 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { UrlServices } from '../urls'
 import { Properties } from '../../properties';
+import { APIResponse } from '../../interfaces/api-response.interface';
 
 //import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
@@ -18,7 +21,7 @@ export class GeneralService implements CanActivate {
     properties = new Properties();
     strSesion = this.properties.strSesion;
     key = "HackersSeeIT2";
-    constructor(private _http: Http, private _router: Router) { }
+    constructor(private _http: Http, private _router: Router, private http: HttpClient) { }
 
 
     canActivate(): boolean {
@@ -92,7 +95,7 @@ export class GeneralService implements CanActivate {
         //! this is very important
         //? question
         // TODO esto es lo primero a hacer 
-       
+
 
         //this.blockUI.start('Loading...');
         let result;
@@ -111,7 +114,7 @@ export class GeneralService implements CanActivate {
                     }).catch(this.handleError());
             } else if (tipo == "post") {
                 console.log("contenido de body:" + typeof body);
-               
+
 
 
                 return this._http["post"](url, body, optionsToken)
@@ -151,25 +154,31 @@ export class GeneralService implements CanActivate {
             /** 
              * Para peticiones que no necesitan estar autenticadas
             */
-            if (tipo == "post") {
-              //  console.log("contenido de body:" + typeof body);
-           
-               var formData = new FormData();
-               formData.append("imagen", "ads")
-              
-                return this._http["post"]("http://localhost:6060/rest/face/identificarB", formData)
-                    .map((res: Response) => {
-                        //this.blockUI.stop();
-                     //   result = res.json();
-                     console.log(res);
-                        return res;
-                    }).catch((err) => {
-                        console.log(err)
-                        // Do messaging and error handling here
-                        return Observable.throw(err);
-
-              });
-            }
+           /* var formData = new FormData();
+            formData.append("imagen", "ads");
+            return this.http.post("http://localhost:6060/rest/face/identificarB", formData)
+            */
+            
+             if (tipo == "post") {
+               //  console.log("contenido de body:" + typeof body);
+            
+           //     var formData = new FormData();
+             //   formData.append("imagen", "ads")
+          /*   const httpOptions = {
+                headers: new HttpHeaders({
+                  'Content-Type':  'text/html; charset=utf-8',
+                 
+                })
+              }; */ 
+              const httpOptions = {};         
+            // let options = new RequestOptions({ headers: headers });
+                this.http.post(url, body,httpOptions )
+                .subscribe(
+                    data => console.log('success', data),
+                    error => console.log('oops', error)
+                );
+             }
+            
         }
         //return null;
     }
@@ -179,7 +188,7 @@ export class GeneralService implements CanActivate {
     }
     private handleError() {
         return (res: Response) => {
-            
+
             let errMessage: any;
             try {
                 console.log(res);

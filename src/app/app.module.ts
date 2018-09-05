@@ -45,7 +45,8 @@ import {enableProdMode} from '@angular/core';
     BrowserModule,
     SharedModule,  
     RouterModule.forRoot(AppRoutes) ,
-    WebcamModule
+    WebcamModule,
+    HttpClientModule
   ],
   providers: [
     GeneralService,
