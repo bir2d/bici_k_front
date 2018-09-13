@@ -74,14 +74,13 @@ export class LoginComponent implements AfterViewInit, OnInit {
   }
 
   public sendImage():void {
-    if (this.checkImage){
+
       console.log("3) tomo la imagen y valido contra el servicio");
     console.log("valor de imagen :" + this.webcamImage.imageAsBase64);
     console.log(this._faceServices.identificarEmpleado(this.webcamImage.imageAsBase64))
     this.webcamImage= new WebcamImage("", "");
 
-    }
-    console.log("Imagen no cargada no se ejecuta el post");
+   
   }
 
   public toggleWebcam(): void {
