@@ -34,7 +34,6 @@ export class LoginComponent implements AfterViewInit, OnInit {
   login() {
 
     this._generalServices.autenticar(this.usuario, this.password).subscribe((respuesta) => {
-      console.log(respuesta);
 
     }, (err: any) => console.log(err));
   }
@@ -52,7 +51,7 @@ export class LoginComponent implements AfterViewInit, OnInit {
   public errors: WebcamInitError[] = [];
 
   // latest snapshot
-  public webcamImage: WebcamImage = null;
+  public webcamImage: WebcamImage = new WebcamImage("", "");
 
   // webcam snapshot trigger
   private trigger: Subject<void> = new Subject<void>();
@@ -68,7 +67,21 @@ export class LoginComponent implements AfterViewInit, OnInit {
   }
 
   public triggerSnapshot(): void {
+ 
     this.trigger.next();
+    
+
+  }
+
+  public sendImage():void {
+    if (this.checkImage){
+      console.log("3) tomo la imagen y valido contra el servicio");
+    console.log("valor de imagen :" + this.webcamImage.imageAsBase64);
+    console.log(this._faceServices.identificarEmpleado(this.webcamImage.imageAsBase64))
+    this.webcamImage= new WebcamImage("", "");
+
+    }
+    console.log("Imagen no cargada no se ejecuta el post");
   }
 
   public toggleWebcam(): void {
@@ -87,15 +100,23 @@ export class LoginComponent implements AfterViewInit, OnInit {
   }
 
   public handleImage(webcamImage: WebcamImage): void {
-    // console.info('received webcam image', webcamImage);
-    this.webcamImage = webcamImage;
-    var formData = new FormData();
-    formData.append("imagen", webcamImage.imageAsBase64);
-    console.log(this._faceServices.identificarEmpleado(this.webcamImage.imageAsBase64));
+   // debugger;
+    if (webcamImage.imageAsBase64 != null) {
+      this.webcamImage = webcamImage;
+      console.log("1) inicializo la imagen si no está vacia ");
+    }
+  }
+
+  public checkImage(): boolean {
+    console.log("2) reviso imagen en checkImage ");
+    if (this.webcamImage.imageAsBase64 != "") {
+      return true
+    }
+    return false;
   }
 
   public cameraWasSwitched(deviceId: string): void {
-    console.log('active device: ' + deviceId);
+    // console.log('active device: ' + deviceId);
     this.deviceId = deviceId;
   }
 

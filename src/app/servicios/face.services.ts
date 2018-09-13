@@ -16,9 +16,11 @@ export class FaceServices {
     
         if (imagen != null) {
             this.formData.append('imagen', imagen)
+          //  console.log("mostrando datos de form ");
+          //  console.log(this.formData.get("imagen"))
         }
        
-       // console.log("esto tiene imagen: \n" + this.formData.get('imagen'));
+      
         return this._generalServices.getResources("post", this.url.identificarEmpleado, this.formData)
     }
 

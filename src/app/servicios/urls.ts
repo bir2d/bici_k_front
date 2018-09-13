@@ -4,7 +4,8 @@
 export class UrlServices {
 
     //servidor = "http://10.20.1.113"
-    servidor = "https://192.168.237.129"
+                //https://192.168.237.130
+    servidor = "https://192.168.237.130"
     autorizacion = this.servidor + ":8443";
     proxy = this.servidor + ":8443";
 
