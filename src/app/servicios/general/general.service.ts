@@ -163,6 +163,23 @@ export class GeneralService implements CanActivate {
             }).catch(this.handleError());
     }
 
+    getResourcesNA(url, body = null): Observable<any> {
+        
+        this.http.post(url, body, {
+            headers: new HttpHeaders()
+              .set('Content-Type', 'application/x-www-form-urlencoded')
+          })
+            .subscribe(
+                data => console.log('success', data),
+                error => console.log('oops', error)
+            );
+        return null
+    }
+
+
+
+
+
     stopBlock() {
         // this.blockUI.stop();
     }

@@ -1,6 +1,3 @@
-
-
-
 export class UrlServices {
 
     //servidor = "http://10.20.1.113"

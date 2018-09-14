@@ -43,8 +43,8 @@ export class LoginComponent implements AfterViewInit, OnInit {
   public multipleWebcamsAvailable = false;
   public deviceId: string;
   public videoOptions: MediaTrackConstraints = {
-    // width: {ideal: 1024},
-    // height: {ideal: 576}
+     width: {ideal: 240},
+     height: {ideal: 320}
   };
   public errors: WebcamInitError[] = [];
 
@@ -125,6 +125,6 @@ export class LoginComponent implements AfterViewInit, OnInit {
   fileChangeEvent(event) {
     let e = event.srcElement ? event.srcElement : event.target;
     this.documento = (e.files);
-    console.log(this.documento);
+    
   }
 }
