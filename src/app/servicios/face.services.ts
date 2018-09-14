@@ -10,15 +10,11 @@ export class FaceServices {
 
     constructor(private _generalServices: GeneralService) { }
 
-    identificarEmpleado(imagen){
-
-       let  formData = new FormData();
-    
+    identificarEmpleado(imagen): Observable<any>{
+       let  formData = new FormData();    
         if (imagen != null && imagen!="") {
             formData.append('imagen', imagen)
-         
-            console.log(formData.get("imagen"))
-             this._generalServices.loginFace( this.url.identificarEmpleado, formData)
+            return this._generalServices.loginFace( this.url.identificarEmpleado, formData)
         }      
       
         

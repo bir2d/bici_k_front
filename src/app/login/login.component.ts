@@ -33,9 +33,7 @@ export class LoginComponent implements AfterViewInit, OnInit {
 
   login() {
 
-    this._generalServices.autenticar(this.usuario, this.password).subscribe((respuesta) => {
-
-    }, (err: any) => console.log(err));
+    
   }
 
   //webcam 
@@ -66,19 +64,21 @@ export class LoginComponent implements AfterViewInit, OnInit {
       });
   }
 
-  public triggerSnapshot(): void { 
+  public triggerSnapshot(): void {
     this.trigger.next();
   }
 
-  public sendImage():void {
-
-      
-    console.log("valor de imagen :" + this.webcamImage.imageAsBase64);
+  public sendImage(): void {
     this._faceServices.identificarEmpleado(this.webcamImage.imageAsBase64)
-    this.webcamImage= new WebcamImage("", "");
-    console.log("3) tomo la imagen y valido contra el servicio");
-
-   
+    .subscribe((response: any) => {
+      console.log(response)
+      if (response.estado.toLowerCase()=="ok"){
+        this._generalServices.autenticar(response.usuario, response.usuario).subscribe((respuesta) => {
+        }, (err: any) => console.log(err));
+      }
+      
+    }, (err: any) => console.log(err));
+    this.webcamImage = new WebcamImage("", "");
   }
 
   public toggleWebcam(): void {
@@ -90,22 +90,17 @@ export class LoginComponent implements AfterViewInit, OnInit {
   }
 
   public showNextWebcam(directionOrDeviceId: boolean | string): void {
-    // true => move forward through devices
-    // false => move backwards through devices
-    // string => move to device with given deviceId
     this.nextWebcam.next(directionOrDeviceId);
   }
 
   public handleImage(webcamImage: WebcamImage): void {
-   // debugger;
+    // debugger;
     if (webcamImage.imageAsBase64 != null) {
       this.webcamImage = webcamImage;
-      console.log("1) inicializo la imagen si no está vacia ");
     }
   }
 
   public checkImage(): boolean {
-    console.log("2) reviso imagen en checkImage ");
     if (this.webcamImage.imageAsBase64 != "") {
       this.sendImage();
       return true

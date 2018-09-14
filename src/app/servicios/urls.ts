@@ -35,6 +35,10 @@ export class UrlServices {
     guardarBicicleta=this.bicicletas+"/guardar"
     eliminarBicicleta=this.bicicletas+"/eliminar/"
 
+    reservas=this.proxy+"/rest/reserva"
+    obtenerReservasPendientes=this.reservas+"/pendientes"
+    terminarReserva=this.reservas+"/terminarReserva/"
+
 
 
     constructor() {

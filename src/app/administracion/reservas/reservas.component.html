@@ -1,0 +1,77 @@
+<!-- ============================================================== -->
+<!-- Simple four boxes Row -->
+<!-- ============================================================== -->
+<p-toast position="center"></p-toast>
+<div class="ui-g">
+    <!-- column -->
+    <div class="ui-g-12">
+        <p-panel header="Reservas Actuales" [style]="{'margin-top':'20px'}">
+            <form #form="ngForm" (ngSubmit)="form.valid && guardar()">
+                <div class="ui-g">
+                    <div class="ui-g-12" *ngIf="!editar">
+
+                        <p-table [value]="reservas">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th *ngFor="let col of cols">
+                                        {{col.header}}
+                                    </th>
+                                    <th>
+                                        Opciones
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-reserva>
+                                <tr>
+                                    <td *ngFor="let col of cols">
+                                        {{reserva[col.field]}}
+                                    </td>
+                                    <td  style="text-align: center;width: 95px">
+
+                                        <button pButton type="button" icon="fa fa-times" class="ui-button-danger"  (click)="confirmarDevolucion(reserva)"></button>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                  
+                    <div class="ui-g-12" style="text-align: right">
+
+                        
+                        <button pButton *ngIf="editar" type="submit" icon="pi pi-plus" label="Guardar" class="ui-button-info" style="margin-right: .25em"></button>
+                        <button pButton *ngIf="editar" type="button" icon="pi pi-plus" label="Cancelar" (click)="editar=false" class="ui-button-info"
+                            style="margin-right: .25em"></button>
+
+                    </div>
+
+                </div>
+
+            </form>
+        </p-panel>
+    </div>
+
+    <!-- column -->
+</div>
+
+<p-dialog header="Detalle Candado" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" width="550" >
+    <div class="ui-g" *ngIf="candadoSelecionado">
+        <!-- <div class="ui-g-12" style="text-align:center">
+            <img src="assets/showcase/images/demo/car/{{selectedCar.brand}}.png">
+        </div> -->
+        <ng-container *ngFor="let col of cols">
+            <div class="ui-g-4">{{col.header}}: </div>
+            <div class="ui-g-8">{{candadoSelecionado[col.field]}}</div>
+        </ng-container>
+
+
+
+    </div>
+</p-dialog>
+
+<p-confirmDialog header="Confirmación Devolución" key="confEliminar" [baseZIndex]="2" [autoZIndex]="false" icon="pi pi-exclamation-triangle" width="425" #cd>
+    <p-footer>
+        <button type="button" pButton icon="pi pi-check" label="Aceptar" (click)="cd.accept()"></button>
+        <button type="button" pButton icon="pi pi-times" label="Cancelar" (click)="cd.reject()"></button>
+        
+    </p-footer>
+</p-confirmDialog>
