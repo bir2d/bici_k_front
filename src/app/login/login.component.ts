@@ -66,19 +66,17 @@ export class LoginComponent implements AfterViewInit, OnInit {
       });
   }
 
-  public triggerSnapshot(): void {
- 
+  public triggerSnapshot(): void { 
     this.trigger.next();
-    
-
   }
 
   public sendImage():void {
 
-      console.log("3) tomo la imagen y valido contra el servicio");
+      
     console.log("valor de imagen :" + this.webcamImage.imageAsBase64);
-    console.log(this._faceServices.identificarEmpleado(this.webcamImage.imageAsBase64))
+    this._faceServices.identificarEmpleado(this.webcamImage.imageAsBase64)
     this.webcamImage= new WebcamImage("", "");
+    console.log("3) tomo la imagen y valido contra el servicio");
 
    
   }
@@ -109,6 +107,7 @@ export class LoginComponent implements AfterViewInit, OnInit {
   public checkImage(): boolean {
     console.log("2) reviso imagen en checkImage ");
     if (this.webcamImage.imageAsBase64 != "") {
+      this.sendImage();
       return true
     }
     return false;

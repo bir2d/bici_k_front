@@ -47,18 +47,11 @@
 						 (initError)="handleInitError($event)"></webcam>
 					</span>
 
-					<div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20" data-validate="Ingrese Usuario">
-						<input id="first-name" class="input100" type="text" [(ngModel)]="usuario" name="username" placeholder="Usuario" required>
-						<span class="focus-input100"></span>
-					</div>
-					<div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20" data-validate="Ingrese Contraseña">
-						<input class="input100" type="password" [(ngModel)]="password" name="pass" placeholder="Contraseña" required>
-						<span class="focus-input100"></span>
-					</div>
+					
 					<div class="container-login100-form-btn">
-						<button pButton type="submit" class="ui-button-info" style="width: 100%" label="Ingresar" [disabled]="usuario==null || password==null"></button>
+						
 
-						<p-button label="Tomar foto" (onClick)="sendImage();triggerSnapshot();" style="width: 100%" icon="fa fa-camera" iconPos="left"></p-button>
+						<p-button label="Tomar foto" (onClick)="triggerSnapshot();" style="width: 100%" icon="fa fa-camera" iconPos="left"></p-button>
 						<h4 *ngIf="errors.length > 0">Mensajes:</h4>
 						<ul *ngFor="let error of errors">
 							<li>{{error | json}}</li>
