@@ -154,33 +154,37 @@ export class GeneralService implements CanActivate {
             /** 
              * Para peticiones que no necesitan estar autenticadas
             */
-            /* var formData = new FormData();
-             formData.append("imagen", "ads");
-             return this.http.post("http://localhost:6060/rest/face/identificarB", formData)
-             */
-
-            if (tipo == "post") {
-                //  console.log("contenido de body:" + typeof body);
-
-                //     var formData = new FormData();
-                //   formData.append("imagen", "ads")
-                /*   const httpOptions = {
-                      headers: new HttpHeaders({
-                        'Content-Type':  'text/html; charset=utf-8',
-                       
-                      })
-                    }; */
-                const httpOptions = {};
-                // let options = new RequestOptions({ headers: headers });
-                this.http.post(url, body, httpOptions)
-                    .subscribe(
-                        data => console.log('success', data),
-                        error => console.log('oops', error)
-                    );
-            }
-
+           /* var formData = new FormData();
+            formData.append("imagen", "ads");
+            return this.http.post("http://localhost:6060/rest/face/identificarB", formData)
+            */
+            
+             if (tipo == "post") {
+               //  console.log("contenido de body:" + typeof body);
+            
+           //     var formData = new FormData();
+             //   formData.append("imagen", "ads")
+          /*   const httpOptions = {
+                headers: new HttpHeaders({
+                  'Content-Type':  'text/html; charset=utf-8',
+                 
+                })
+              }; */ 
+              
+             }
+            
         }
         //return null;
+    }
+
+    loginFace(url,body){
+        const httpOptions = {};         
+            // let options = new RequestOptions({ headers: headers });
+                this.http.post(url, body,httpOptions )
+                .subscribe(
+                    data => console.log('success', data),
+                    error => console.log('oops', error)
+                );
     }
 
     getResourcesNA(url, body = null): Observable<any> {

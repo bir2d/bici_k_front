@@ -6,24 +6,22 @@ import { UrlServices } from './urls';
 @Injectable()
 export class FaceServices {
     url = new UrlServices();
-    formData = new FormData();
+    
 
     constructor(private _generalServices: GeneralService) { }
 
-    identificarEmpleado(imagen:String): Observable<any> {
+    identificarEmpleado(imagen){
 
-
-
-        if (imagen != null) {
-            this.formData.append('imagen', imagen.trim())
-            //  console.log("mostrando datos de form ");
-            console.log("valor de imagen en formulario ");
-            console.log(this.formData.get('imagen'));
-            return this._generalServices.getResourcesNA(this.url.identificarEmpleado, this.formData)
-        }
-
-        return null;
-
+       let  formData = new FormData();
+    
+        if (imagen != null && imagen!="") {
+            formData.append('imagen', imagen)
+         
+            console.log(formData.get("imagen"))
+             this._generalServices.loginFace( this.url.identificarEmpleado, formData)
+        }      
+      
+        
     }
 
 
