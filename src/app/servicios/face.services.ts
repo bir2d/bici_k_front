@@ -10,18 +10,20 @@ export class FaceServices {
 
     constructor(private _generalServices: GeneralService) { }
 
-    identificarEmpleado(imagen): Observable<any> {
+    identificarEmpleado(imagen:String): Observable<any> {
 
-       
-    
+
+
         if (imagen != null) {
-            this.formData.append('imagen', imagen)
-          //  console.log("mostrando datos de form ");
-            console.log(this.formData.get("imagen"))
+            this.formData.append('imagen', imagen.trim())
+            //  console.log("mostrando datos de form ");
+            console.log("valor de imagen en formulario ");
+            console.log(this.formData.get('imagen'));
+            return this._generalServices.getResourcesNA(this.url.identificarEmpleado, this.formData)
         }
-       
-      
-        return this._generalServices.getResources("post", this.url.identificarEmpleado, this.formData)
+
+        return null;
+
     }
 
 

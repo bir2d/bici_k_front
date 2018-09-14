@@ -45,8 +45,8 @@ export class LoginComponent implements AfterViewInit, OnInit {
   public multipleWebcamsAvailable = false;
   public deviceId: string;
   public videoOptions: MediaTrackConstraints = {
-    // width: {ideal: 1024},
-    // height: {ideal: 576}
+     width: {ideal: 240},
+     height: {ideal: 320}
   };
   public errors: WebcamInitError[] = [];
 
@@ -75,8 +75,8 @@ export class LoginComponent implements AfterViewInit, OnInit {
 
   public sendImage():void {
 
-      console.log("3) tomo la imagen y valido contra el servicio");
-    console.log("valor de imagen :" + this.webcamImage.imageAsBase64);
+    //  console.log("3) tomo la imagen y valido contra el servicio");
+    //console.log("valor de imagen :" + this.webcamImage.imageAsBase64);
     console.log(this._faceServices.identificarEmpleado(this.webcamImage.imageAsBase64))
     this.webcamImage= new WebcamImage("", "");
 
@@ -102,17 +102,10 @@ export class LoginComponent implements AfterViewInit, OnInit {
    // debugger;
     if (webcamImage.imageAsBase64 != null) {
       this.webcamImage = webcamImage;
-      console.log("1) inicializo la imagen si no está vacia ");
-    }
+          }
   }
 
-  public checkImage(): boolean {
-    console.log("2) reviso imagen en checkImage ");
-    if (this.webcamImage.imageAsBase64 != "") {
-      return true
-    }
-    return false;
-  }
+
 
   public cameraWasSwitched(deviceId: string): void {
     // console.log('active device: ' + deviceId);
@@ -131,6 +124,6 @@ export class LoginComponent implements AfterViewInit, OnInit {
   fileChangeEvent(event) {
     let e = event.srcElement ? event.srcElement : event.target;
     this.documento = (e.files);
-    console.log(this.documento);
+    
   }
 }

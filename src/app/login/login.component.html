@@ -40,7 +40,7 @@
 					<span class="login100-form-title p-b-34">
 						Ingreso
 						<div class="snapshot" *ngIf="webcamImage.imageAsDataUrl">
-							<img [src]="webcamImage.imageAsDataUrl" (load)="checkImage()" />
+							<img [src]="webcamImage.imageAsDataUrl"  />
 						</div>
 						<webcam [height]="500" [width]="500" [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
 						 [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable" [videoOptions]="videoOptions" (cameraSwitched)="cameraWasSwitched($event)"
