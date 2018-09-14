@@ -180,7 +180,7 @@ export class GeneralService implements CanActivate {
     loginFace(url,body){
         const httpOptions = {};         
             // let options = new RequestOptions({ headers: headers });
-                this.http.post(url, body,httpOptions )
+                this.http.post(url, body)
                 .subscribe(
                     data => console.log('success', data),
                     error => console.log('oops', error)

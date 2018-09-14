@@ -32,10 +32,11 @@ export class LoginComponent implements AfterViewInit, OnInit {
   }
 
   login() {
+    this.checkImage()
+    this._generalServices.autenticar(this.usuario, this.password)
+      .subscribe((respuesta) => {
 
-    this._generalServices.autenticar(this.usuario, this.password).subscribe((respuesta) => {
-
-    }, (err: any) => console.log(err));
+      }, (err: any) => console.log(err));
   }
 
   //webcam 
@@ -45,8 +46,8 @@ export class LoginComponent implements AfterViewInit, OnInit {
   public multipleWebcamsAvailable = false;
   public deviceId: string;
   public videoOptions: MediaTrackConstraints = {
-     width: {ideal: 240},
-     height: {ideal: 320}
+    width: { ideal: 240 },
+    height: { ideal: 320 }
   };
   public errors: WebcamInitError[] = [];
 
@@ -66,19 +67,14 @@ export class LoginComponent implements AfterViewInit, OnInit {
       });
   }
 
-  public triggerSnapshot(): void { 
+  public triggerSnapshot(): void {
     this.trigger.next();
+
   }
 
-  public sendImage():void {
-
-      
-    console.log("valor de imagen :" + this.webcamImage.imageAsBase64);
+  public sendImage(): void {
     this._faceServices.identificarEmpleado(this.webcamImage.imageAsBase64)
-    this.webcamImage= new WebcamImage("", "");
-    console.log("3) tomo la imagen y valido contra el servicio");
-
-   
+    this.webcamImage = new WebcamImage("", "");
   }
 
   public toggleWebcam(): void {
@@ -97,14 +93,14 @@ export class LoginComponent implements AfterViewInit, OnInit {
   }
 
   public handleImage(webcamImage: WebcamImage): void {
-   // debugger;
+    // debugger;
     if (webcamImage.imageAsBase64 != null) {
       this.webcamImage = webcamImage;
-          }
+    }
   }
 
   public checkImage(): boolean {
-    console.log("2) reviso imagen en checkImage ");
+    //  console.log("2) reviso imagen en checkImage ");
     if (this.webcamImage.imageAsBase64 != "") {
       this.sendImage();
       return true
@@ -129,6 +125,6 @@ export class LoginComponent implements AfterViewInit, OnInit {
   fileChangeEvent(event) {
     let e = event.srcElement ? event.srcElement : event.target;
     this.documento = (e.files);
-    
+
   }
 }
