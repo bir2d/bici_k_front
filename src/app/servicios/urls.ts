@@ -2,7 +2,7 @@ export class UrlServices {
 
     //servidor = "http://10.20.1.113"
                 //https://192.168.237.130
-    servidor = "https://192.168.237.130"
+    servidor = "https://192.168.5.133"
     autorizacion = this.servidor + ":9443";
     proxy = this.servidor + ":9443";
 
@@ -31,6 +31,10 @@ export class UrlServices {
     obtenerBicicletas=this.bicicletas+""
     guardarBicicleta=this.bicicletas+"/guardar"
     eliminarBicicleta=this.bicicletas+"/eliminar/"
+
+    reservas=this.proxy+"/rest/reserva"
+    obtenerReservasPendientes=this.reservas+"/pendientes"
+    terminarReserva=this.reservas+"/terminarReserva/"
 
 
 

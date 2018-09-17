@@ -38,6 +38,10 @@ export const AppRoutes: Routes = [
     {
       path: 'empleados',
       loadChildren: './administracion/empleados/empleados.module#EmpleadosModule'
+    }, {
+      path: 'reservas',
+      loadChildren: './administracion/reservas/reservas.module#ReservasModule'
+
     }
 
     ]

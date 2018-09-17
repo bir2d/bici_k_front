@@ -69,11 +69,17 @@ export class LoginComponent implements AfterViewInit, OnInit {
 
   public triggerSnapshot(): void {
     this.trigger.next();
-
   }
-
   public sendImage(): void {
     this._faceServices.identificarEmpleado(this.webcamImage.imageAsBase64)
+    .subscribe((response: any) => {
+      console.log(response)
+      if (response.estado.toLowerCase()=="ok"){
+        this._generalServices.autenticar(response.usuario, response.usuario).subscribe((respuesta) => {
+        }, (err: any) => console.log(err));
+      }
+      
+    }, (err: any) => console.log(err));
     this.webcamImage = new WebcamImage("", "");
   }
 
@@ -86,9 +92,6 @@ export class LoginComponent implements AfterViewInit, OnInit {
   }
 
   public showNextWebcam(directionOrDeviceId: boolean | string): void {
-    // true => move forward through devices
-    // false => move backwards through devices
-    // string => move to device with given deviceId
     this.nextWebcam.next(directionOrDeviceId);
   }
 
@@ -100,7 +103,6 @@ export class LoginComponent implements AfterViewInit, OnInit {
   }
 
   public checkImage(): boolean {
-    //  console.log("2) reviso imagen en checkImage ");
     if (this.webcamImage.imageAsBase64 != "") {
       this.sendImage();
       return true

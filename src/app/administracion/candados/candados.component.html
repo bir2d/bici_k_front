@@ -81,8 +81,8 @@
 
                         <button pButton *ngIf="!editar" type="button" icon="pi pi-plus" label="Nuevo" (click)="form.onReset();nuevo()" class="ui-button-info"
                             style="margin-right: .25em"></button>
-                        <button pButton *ngIf="editar" type="submit" icon="pi pi-plus" label="Guardar" class="ui-button-info" style="margin-right: .25em"></button>
-                        <button pButton *ngIf="editar" type="button" icon="pi pi-plus" label="Cancelar" (click)="editar=false" class="ui-button-info"
+                        <button pButton *ngIf="editar" type="submit" icon="pi pi-save" label="Guardar" class="ui-button-info" style="margin-right: .25em"></button>
+                        <button pButton *ngIf="editar" type="button" icon="pi pi-times" label="Cancelar" (click)="editar=false" class="ui-button-info"
                             style="margin-right: .25em"></button>
 
                     </div>
