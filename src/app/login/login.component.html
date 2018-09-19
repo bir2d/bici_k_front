@@ -39,39 +39,25 @@
 				<form #form="ngForm" (ngSubmit)="form.valid" class="login100-form validate-form">
 					<span class="login100-form-title p-b-34">
 						Ingreso
-						<div class="snapshot" *ngIf="webcamImage.imageAsDataUrl">
-							<img [src]="webcamImage.imageAsDataUrl"  />
-						</div>
-						<webcam [height]="320" [width]="240" [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
-						 [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable" [videoOptions]="videoOptions" (cameraSwitched)="cameraWasSwitched($event)"
-						 (initError)="handleInitError($event)"></webcam>
 					</span>
-
-					
+					<div class="snapshot" *ngIf="webcamImage.imageAsDataUrl">
+						<img [src]="webcamImage.imageAsDataUrl" />
+					</div>
+					<div class="container-login100-form-btn">
+						<webcam [height]="320" [width]="240" [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
+						 [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable" [videoOptions]="videoOptions"
+						 (cameraSwitched)="cameraWasSwitched($event)" (initError)="handleInitError($event)"></webcam>						
+					</div>
+					<div class="container-login100-form-btn">
+					<p-button label="Tomar foto" (onClick)="triggerSnapshot();login()" icon="fa fa-camera"
+						 iconPos="left"></p-button>
+						</div>
 					<div class="container-login100-form-btn">
 						
-
-						<p-button label="Tomar foto" (onClick)="triggerSnapshot();login()" style="width: 100%" icon="fa fa-camera" iconPos="left"></p-button>
 						<h4 *ngIf="errors.length > 0">Mensajes:</h4>
 						<ul *ngFor="let error of errors">
 							<li>{{error | json}}</li>
 						</ul>
-					</div>
-
-					<div class="w-full text-center p-t-27 p-b-239">
-						<span class="txt1">
-
-						</span>
-
-						<a href="#" class="txt2">
-
-						</a>
-					</div>
-
-					<div class="w-full text-center">
-						<a href="#" class="txt3">
-
-						</a>
 					</div>
 				</form>
 
@@ -84,7 +70,7 @@
 	<div>
 
 
-		<br/>
+		<br />
 
 
 	</div>

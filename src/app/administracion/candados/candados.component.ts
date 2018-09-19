@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormControl, Validators } from '@angular/forms';
 import { CandadosService } from '../../servicios/candados.services';
 import { ConfirmationService } from 'primeng/api';
-import {MessageService} from 'primeng/api';
+import { MessageService } from 'primeng/api';
 
 
 @Component({
@@ -24,8 +24,8 @@ export class CandadosComponent implements AfterViewInit, OnInit {
 
   }
   addSingle(error) {
-    this.messageService.add({severity:'error', summary:'Conexión', detail:error});
-}
+    this.messageService.add({ severity: 'error', summary: 'Conexión', detail: error });
+  }
 
   ngOnInit() {
     //this.carService.getCarsSmall().then(cars => this.cars = cars);
@@ -77,11 +77,30 @@ export class CandadosComponent implements AfterViewInit, OnInit {
       accept: () => {
         this._candadoServices.eliminarCandado(this.candadoSelecionado)
           .subscribe((candados: any) => {
-          
+
             this.cargarCandados()
           }, (err: any) => console.log("error"));
       }
     });
   }
 
+  generarClave(candado) {
+    let clave: string;
+    clave = Math.round(Math.random() * 10000).toString();
+    switch (clave.length) {
+      case 3:
+        clave = '0' + clave;
+        break;
+      case 2:
+        clave = '00'+ clave;
+        break;
+      case 1:
+        clave= '000'+ clave;
+        break;
+      default:
+      clave = clave;
+    }
+    this.candadoSelecionado.clave = clave;
+
+  }
 }
