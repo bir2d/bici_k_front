@@ -10,7 +10,7 @@ export const AppRoutes: Routes = [
     canActivate: [AuthGuard],
     children: [{
       path: '',
-      redirectTo: '/starter',
+      redirectTo: '/administracion/bicicletas',
       pathMatch: 'full'
     }, {
       path: '',
