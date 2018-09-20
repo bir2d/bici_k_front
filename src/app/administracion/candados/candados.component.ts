@@ -43,7 +43,7 @@ export class CandadosComponent implements AfterViewInit, OnInit {
     this._candadoServices.obtenerCandados()
       .subscribe((candados: any[]) => {
         this.candados = candados;
-        console.log(candados);
+     
 
       }, (err: any) => this.addSingle("No se puede conectar con el backend"));
   }

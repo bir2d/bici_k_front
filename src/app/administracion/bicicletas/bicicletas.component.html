@@ -9,15 +9,16 @@
             <form #form="ngForm" (ngSubmit)="form.valid && guardar()">
                 <div class="ui-g">
                     <div class="ui-g-12" *ngIf="!editar">
-                        <p-dataView #dv [value]="bicicletas" [paginator]="true" layout="grid" [rows]="5" paginatorPosition="both" filterBy="codigoBien"
-                            [sortField]="sortField" [sortOrder]="sortOrder">
+                        <p-dataView #dv [value]="bicicletas" [paginator]="true" layout="grid" [rows]="5"
+                            paginatorPosition="both" filterBy="codigoBien" [sortField]="sortField" [sortOrder]="sortOrder">
                             <p-header>
                                 <div class="ui-helper-clearfix">
                                     <div class="ui-g">
 
                                         <div class="ui-g-6 ui-md-6 filter-container">
                                             <div style="position:relative">
-                                                <input type="search" pInputText placeholder="Buscar por codigo de bien" (keyup)="dv.filter($event.target.value)">
+                                                <input type="search" pInputText placeholder="Buscar por codigo de bien"
+                                                    (keyup)="dv.filter($event.target.value)">
                                             </div>
                                         </div>
                                         <div class="ui-g-6 ui-md-6" style="text-align:right">
@@ -30,7 +31,8 @@
                             <ng-template let-bicicleta pTemplate="listItem">
                                 <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
                                     <div class="ui-g-12 ui-md-3" style="text-align:center">
-                                        <img src="https://s3-us-west-2.amazonaws.com/krfacerekognition/{{bicicleta.foto}}" height="200" width="200">
+                                        <img src="https://s3-us-west-2.amazonaws.com/krfacerekognition/{{bicicleta.foto}}"
+                                            height="200" width="200">
                                     </div>
                                     <div class="ui-g-12 ui-md-8 car-details">
                                         <div class="ui-g">
@@ -51,9 +53,11 @@
                                         </div>
                                     </div>
                                     <div class="ui-g-12 ui-md-1 search-icon">
-                                        <button pButton type="button" icon="pi pi-search" (click)="ver(bicicleta)" class="ui-button-success"></button>
+                                        <button pButton type="button" icon="pi pi-search" (click)="ver(bicicleta)"
+                                            class="ui-button-success"></button>
                                         <button pButton type="button" icon="fa fa-pencil-square-o" (click)="editarBicicleta(bicicleta)"></button>
-                                        <button pButton type="button" icon="fa fa-times" class="ui-button-danger" (click)="confirmarEliminar(bicicleta)"></button>
+                                        <button pButton type="button" icon="fa fa-times" class="ui-button-danger"
+                                            (click)="confirmarEliminar(bicicleta)"></button>
 
                                     </div>
                                 </div>
@@ -61,12 +65,16 @@
                             <ng-template let-bicicleta pTemplate="gridItem">
                                 <div style="padding:.5em" class="ui-g-12 ui-md-3">
                                     <p-panel [header]="bicicleta.codigoBien" [style]="{'text-align':'center'}">
-                                        <img src="https://s3-us-west-2.amazonaws.com/krfacerekognition/{{bicicleta.foto}}" width="60">
-                                        <div class="car-detail">{{bicicleta.descripcion}} - {{bicicleta.disponibilidad}}</div>
+                                        <img src="https://s3-us-west-2.amazonaws.com/krfacerekognition/{{bicicleta.foto}}"
+                                            width="60">
+                                        <div class="car-detail">{{bicicleta.descripcion}} -
+                                            {{bicicleta.disponibilidad}}</div>
                                         <hr class="ui-widget-content" style="border-top:0">
-                                        <button pButton type="button" icon="pi pi-search" class="ui-button-success" (click)="ver(bicicleta)" style="margin-top:0"></button>
+                                        <button pButton type="button" icon="pi pi-search" class="ui-button-success"
+                                            (click)="ver(bicicleta)" style="margin-top:0"></button>
                                         <button pButton type="button" icon="fa fa-pencil-square-o" (click)="editarBicicleta(bicicleta)"></button>
-                                        <button pButton type="button" icon="fa fa-times" class="ui-button-danger" (click)="confirmarEliminar(bicicleta)"></button>
+                                        <button pButton type="button" icon="fa fa-times" class="ui-button-danger"
+                                            (click)="confirmarEliminar(bicicleta)"></button>
 
                                     </p-panel>
                                 </div>
@@ -82,7 +90,8 @@
                                     {{cols[0].header}} *:
                                 </div>
                                 <div class="ui-grid-col-6">
-                                    <input pInputText type="text" name="codigoBien" [(ngModel)]="bicicletaSelecionado.codigoBien" required/>
+                                    <input pInputText type="text" name="codigoBien" [(ngModel)]="bicicletaSelecionado.codigoBien"
+                                        required />
                                 </div>
                                 <div class="ui-grid-col-4">
                                     <p-message severity="error" text="Codigo de Bien is requerido" *ngIf="form.submitted  && !form.form.controls.codigoBien?.valid"></p-message>
@@ -93,10 +102,10 @@
                                     {{cols[1].header}} *:
                                 </div>
                                 <div class="ui-grid-col-6">
-                                    <input pInputText type="text" name="estado" [(ngModel)]="bicicletaSelecionado.estado" required />
+                                    <p-dropdown [options]="estados" [(ngModel)]="bicicletaSelecionado.estado" name="estado"></p-dropdown>
                                 </div>
                                 <div class="ui-grid-col-4">
-                                    <p-message severity="error" text="Estado is requerido" *ngIf="form.submitted  && !form.form.controls.estado?.valid"></p-message>
+                                    
                                 </div>
                             </div>
                             <div class="ui-grid-row">
@@ -104,7 +113,8 @@
                                     {{cols[2].header}} *:
                                 </div>
                                 <div class="ui-grid-col-6">
-                                    <input pInputText type="text" name="descripcion" [(ngModel)]="bicicletaSelecionado.descripcion" required />
+                                    <input pInputText type="text" name="descripcion" [(ngModel)]="bicicletaSelecionado.descripcion"
+                                        required />
                                 </div>
                                 <div class="ui-grid-col-4">
                                     <p-message severity="error" text="Descripción de Bien is requerido" *ngIf="form.submitted  && !form.form.controls.descripcion?.valid"></p-message>
@@ -117,8 +127,8 @@
                                 </div>
                                 <div class="ui-grid-col-6">
                                     {{bicicletaSelecionado.foto}}
-                                    <input name="file" type="file" id="adjuntar" accept="image/*" class="ui-g-12 ui-md-12 ui-lg-12 inputUpload" (change)="fileChangeEvent($event)"
-                                        placeholder="Subir Imagen..." />
+                                    <input name="file" type="file" id="adjuntar" accept="image/*" class="ui-g-12 ui-md-12 ui-lg-12 inputUpload"
+                                        (change)="fileChangeEvent($event)" placeholder="Subir Imagen..." />
 
                                 </div>
                                 <div class="ui-grid-col-4">
@@ -130,7 +140,8 @@
                                     Candado:
                                 </div>
                                 <div class="ui-grid-col-6">
-                                    <p-dropdown [options]="candadosItem" [(ngModel)]="bicicletaSelecionado.candadoId" name="candado"></p-dropdown>
+                                    <p-dropdown [options]="candadosItem" [(ngModel)]="bicicletaSelecionado.candadoId"
+                                        name="candado"></p-dropdown>
 
                                 </div>
                                 <div class="ui-grid-col-4">
@@ -146,11 +157,12 @@
                     </div>
                     <div class="ui-g-12" style="text-align: right">
 
-                        <button pButton *ngIf="!editar" type="button" icon="pi pi-plus" label="Nuevo" (click)="form.onReset();nuevo()" class="ui-button-info"
+                        <button pButton *ngIf="!editar" type="button" icon="pi pi-plus" label="Nuevo" (click)="form.onReset();nuevo()"
+                            class="ui-button-info" style="margin-right: .25em"></button>
+                        <button pButton *ngIf="editar" type="submit" icon="pi pi-save" label="Guardar" class="ui-button-info"
                             style="margin-right: .25em"></button>
-                        <button pButton *ngIf="editar" type="submit" icon="pi pi-save" label="Guardar" class="ui-button-info" style="margin-right: .25em"></button>
-                        <button pButton *ngIf="editar" type="button" icon="pi pi-times" label="Cancelar" (click)="editar=false" class="ui-button-info"
-                            style="margin-right: .25em"></button>
+                        <button pButton *ngIf="editar" type="button" icon="pi pi-times" label="Cancelar" (click)="editar=false"
+                            class="ui-button-info" style="margin-right: .25em"></button>
 
                     </div>
 
@@ -163,14 +175,15 @@
     <!-- column -->
 </div>
 
- <p-dialog header="Detalle Bicicleta" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" width="750" >
+<p-dialog header="Detalle Bicicleta" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" width="750">
     <div class="ui-g" *ngIf="bicicletaSelecionado" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
         <!-- <div class="ui-g-12" style="text-align:center">
             <img src="assets/showcase/images/demo/car/{{selectedCar.brand}}.png">
         </div> -->
 
         <div class="ui-g-6 ui-md-6" style="text-align:center">
-            <img src="https://s3-us-west-2.amazonaws.com/krfacerekognition/{{bicicletaSelecionado.foto}}" height="200" width="200">
+            <img src="https://s3-us-west-2.amazonaws.com/krfacerekognition/{{bicicletaSelecionado.foto}}" height="200"
+                width="200">
         </div>
         <div class="ui-g-6 ui-md-6 car-details">
             <div class="ui-g">

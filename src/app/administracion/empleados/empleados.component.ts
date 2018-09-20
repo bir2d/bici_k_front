@@ -80,7 +80,6 @@ export class EmpleadosComponent implements AfterViewInit, OnInit {
   fileChangeEvent(event) {
     let e = event.srcElement ? event.srcElement : event.target;
     this.documento = (e.files);
-    console.log(this.documento);
   }
 
   confirmarEliminar(empleado) {

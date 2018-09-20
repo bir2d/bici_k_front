@@ -4,8 +4,9 @@ import { FormControl, Validators } from '@angular/forms';
 import { BicicletasService } from '../../servicios/bicicletas.services';
 import { ConfirmationService } from 'primeng/api';
 import { CandadosService } from '../../servicios/candados.services';
-import {SelectItem} from 'primeng/api';
-import {MessageService} from 'primeng/api';
+import { SelectItem } from 'primeng/api';
+import { MessageService } from 'primeng/api';
+
 
 @Component({
   selector: 'bicicletas',
@@ -21,17 +22,23 @@ export class BicicletasComponent implements AfterViewInit, OnInit {
   displayDialog = false
   editar = false
   submitted = false
+  estados: SelectItem[];
   documento;
-  candadosItem : SelectItem[];
-  constructor(private _bicicletaServices: BicicletasService, 
+  candadosItem: SelectItem[];
+  constructor(private _bicicletaServices: BicicletasService,
     private _candadoServices: CandadosService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService) {
-
+    this.estados = [
+      {label:'Seleccione', value:null},
+      { label: "Bueno", value: "Bueno" },
+      { label: "Malo", value: "Malo" },
+      { label: "Regular", value: "Regular" }
+    ]
   }
   addSingle(error) {
-    this.messageService.add({severity:'error', summary:'Conexión', detail:error});
-}
+    this.messageService.add({ severity: 'error', summary: 'Conexión', detail: error });
+  }
 
   ngOnInit() {
 
@@ -39,21 +46,21 @@ export class BicicletasComponent implements AfterViewInit, OnInit {
       { field: 'codigoBien', header: 'Código Bien' },
       { field: 'estado', header: 'Estado' },
       { field: 'descripcion', header: 'Descripción' }
-     
+
     ];
     this.cargarBicicletas();
     this.cargarCandaddos();
 
   }
-  cargarCandaddos(){
+  cargarCandaddos() {
     this._candadoServices.obtenerCandadosSinAsignar()
-    .subscribe((candados: any[]) => {
-      this.candadosItem=[{label:'No asignar candado', value:null}]
-      candados.forEach(x => {
-        this.candadosItem.push({label:x.descripcion, value:x.id})
-      });
+      .subscribe((candados: any[]) => {
+        this.candadosItem = [{ label: 'No asignar candado', value: null }]
+        candados.forEach(x => {
+          this.candadosItem.push({ label: x.descripcion, value: x.id })
+        });
 
-    }, (err: any) => this.addSingle("No se puede conectar con el backend"));
+      }, (err: any) => this.addSingle("No se puede conectar con el backend"));
   }
   cargarBicicletas() {
     this._bicicletaServices.obtenerBicicletas()
@@ -72,8 +79,8 @@ export class BicicletasComponent implements AfterViewInit, OnInit {
   }
 
   guardar() {
-    if(this.bicicletaSelecionado.id==null)this.bicicletaSelecionado["disponibilidad"]="Disponible"
-    this._bicicletaServices.guardarBicicleta(this.bicicletaSelecionado,this.documento)
+    if (this.bicicletaSelecionado.id == null) this.bicicletaSelecionado["disponibilidad"] = "Disponible"
+    this._bicicletaServices.guardarBicicleta(this.bicicletaSelecionado, this.documento)
       .subscribe((bicicletas: any) => {
         this.editar = false;
         this.cargarBicicletas()
@@ -87,14 +94,14 @@ export class BicicletasComponent implements AfterViewInit, OnInit {
   confirmarEliminar(bicicleta) {
     this.bicicletaSelecionado = bicicleta
     this.confirmationService.confirm({
-      
+
       key: "confEliminarBici",
       message: '¿Está seguro que desea eliminar el bien ' + bicicleta.codigoBien + '?',
       accept: () => {
         this._bicicletaServices.eliminarBicicleta(this.bicicletaSelecionado)
           .subscribe((bicicletas: any) => {
-          
-           // this.cargarBicicletas()
+
+            // this.cargarBicicletas()
           }, (err: any) => console.log("error"));
       }
     });
