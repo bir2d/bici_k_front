@@ -53,7 +53,7 @@ export class ReservasComponent implements AfterViewInit, OnInit {
           x.empleadoNombre=x.empleado.nombre
           x.bicicletaDescripcion=x.bicicleta.codigoBien
           let fin = new Date(x.inicioUso) // your date object
-          fin.setHours(fin.getHours() + x.tiempoUso)
+          fin.setMinutes(fin.getMinutes() + x.tiempoUso)
           x.inicioUso=this.datePipe.transform(new Date(x.inicioUso),"yyyy-MM-dd HH:mm");
           x.finEstimado=this.datePipe.transform(fin,"yyyy-MM-dd HH:mm");
         });

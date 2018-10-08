@@ -20,9 +20,11 @@ export class BicicletasService {
         return this._generalServices.getResources("post", this.url.guardarBicicleta, formData)
     }
 
-    eliminarBicicleta(candado): Observable<any> {
-        return this._generalServices.getResources("delete", this.url.eliminarBicicleta + candado.id)
+    eliminarBicicleta(bicicleta): Observable<any> {
+        return this._generalServices.getResources("delete", this.url.eliminarBicicleta + bicicleta.id)
+    
     }
+   
 
 
 }

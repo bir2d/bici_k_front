@@ -108,8 +108,9 @@ export class GeneralService implements CanActivate {
             if (tipo == "get") {
                 return this._http["get"](url, optionsToken)
                     .map((res: Response) => {
-                        //this.blockUI.stop();
-                        result = res.json();
+         
+                                result = res.json();
+   
                         return result;
                     }).catch(this.handleError());
             } else if (tipo == "post") {

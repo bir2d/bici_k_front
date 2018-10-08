@@ -63,10 +63,12 @@ export class BicicletasComponent implements AfterViewInit, OnInit {
       }, (err: any) => this.addSingle("No se puede conectar con el backend"));
   }
   cargarBicicletas() {
+   // debugger;
     this._bicicletaServices.obtenerBicicletas()
       .subscribe((bicicletas: any[]) => {
         this.bicicletas = bicicletas;
-      }, (err: any) => console.log("error"));
+        console.log(bicicletas);
+      }, (err: any) => console.log("el error es..." + err));
   }
   ver(bicicleta) {
     this.bicicletaSelecionado = bicicleta;
@@ -98,11 +100,11 @@ export class BicicletasComponent implements AfterViewInit, OnInit {
       key: "confEliminarBici",
       message: '¿Está seguro que desea eliminar el bien ' + bicicleta.codigoBien + '?',
       accept: () => {
+       
         this._bicicletaServices.eliminarBicicleta(this.bicicletaSelecionado)
           .subscribe((bicicletas: any) => {
-
-            // this.cargarBicicletas()
-          }, (err: any) => console.log("error"));
+            this.cargarBicicletas()
+          }, (err: any) => console.log("error de borrado "+ err ));
       }
     });
   }
